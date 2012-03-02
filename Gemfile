@@ -15,6 +15,8 @@ end
 
 # Production environment dependencies
 group :production, :staging do
+  gem 'pg'
+  gem 'thin'
 end
 
 # Development environment dependencies (also needed by test environement)
