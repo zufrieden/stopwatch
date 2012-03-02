@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 # Globals dependencies
 gem 'rails', '3.2.2'
 
+gem 'airbrake'
+
 # Assets dependencies
 group :assets do
   gem 'jquery-rails'
