@@ -1,0 +1,104 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    
+    <title>Stopwatch</title>
+    <%= stylesheet_link_tag    "presentation", :media => "all" %>
+    
+    <%= csrf_meta_tags %>
+
+    
+    
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+<body>
+
+
+<div id="impress" class="impress-not-supported">
+
+    <div class="fallback-message">
+        <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+        <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser. Upcoming version 10 of Internet Explorer <i>should</i> also handle it.</p>
+    </div>
+
+
+    <div id="need-a-timer" class="step slide" data-x="-800" data-y="-3460" data-z="-30000">
+        <h2>YOUR</h2>
+        <h1><strong>STARTUP</strong> WEEKEND</h1>
+        <h3>NEED A NEW TIMER</h3>
+        <small>Press <strong>SPACE BAR</strong> to start</small>
+    </div>
+
+    <div id="swiss-quality" class="step slide dotslide" data-x="-800" data-y="-3460" data-z="-20000">
+        <small>first thing first ...</small>
+        <h1>SWISS = ON TIME</h1>
+    </div>
+
+    <div id="logo" class="step slide" data-x="0" data-y="0">
+        <h1>stopwat<span><strong>.</strong></span>ch</h1>
+        <h2>A timer for your conference</h2>
+    </div>
+
+    <div id="timer" class="step slide" data-x="0" data-y="500" data-z="0">
+        <h1>Let's start the timer</h1>
+        <div class="stopwatch">
+            <time class="dash hours_dash">
+                <span class="digit">0</span>
+                <span class="digit">0</span>
+                <span class="dash_title">.</span>
+            </time>
+            <time class="dash minutes_dash">
+                <span class="digit">0</span>
+                <span class="digit">0</span>
+                <span class="dash_title">.</span>
+            </time>
+            <time class="dash seconds_dash">
+                <span class="digit">0</span>
+                <span class="digit">0</span>
+            </time>
+        </div>
+    </div>
+
+    <div id="how_better" class="step slide title_slide" data-x="0" data-y="1500" data-z="0">
+        <h1>How <strong>good</strong><br/> is our timer ?</h1>
+    </div>
+
+    <div id="how_better" class="step slide title_slide" data-x="0" data-y="1500" data-z="0">
+        <h1>How <strong>good</strong><br/> is our timer ?</h1>
+    </div>
+
+
+
+    <div id="intro" class="step slide content_slide" data-x="0" data-y="1000" data-z="0">
+        <h1>How better ?</h1>
+        <ul>
+            <li>Over devices synchronisation</li>
+            <li>Brandable</li>
+            <li>Remote management</li>
+            <li>#tweeterWall</li>
+        </ul>
+    </div>
+
+
+</div>
+
+<div class="hint">
+    <p>Use a spacebar or arrow keys to navigate</p>
+</div>
+<script>
+if ("ontouchstart" in document.documentElement) { 
+    document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+}
+</script>
+
+
+<%= javascript_include_tag "presentation" %>
+<script>impress();</script>
+
+
+</body>
+</html>
