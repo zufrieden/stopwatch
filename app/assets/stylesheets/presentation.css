@@ -82,7 +82,7 @@ a {
     text-decoration: none;
     padding: 0 0.1em;
     background: rgba(255,255,255,0.5);
-    text-shadow: -1px -1px 2px rgba(100,100,100,0.9);
+    /*text-shadow: -1px -1px 2px rgba(100,100,100,0.9);*/
     border-radius: 0.2em;
     
     -webkit-transition: 0.5s;
@@ -647,7 +647,12 @@ line-height: 1.2em;
 #contact_us h2{
 
 }
-
+.contact_us{
+    margin-top: 0.3em;
+}
+.contact_us a{
+    color:#f00;
+}
 /* IMPRESS NOT SUPPORTED STYLES */
 
 .fallback-message {
