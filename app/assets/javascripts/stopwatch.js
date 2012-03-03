@@ -49,11 +49,15 @@
 
     // update timer
     _timer: function() {
-      if (this._started) {
+      if (this._started && this._time >= 0) {
         var timestamp = new Date().getTime();
+
         this._render(this._time);
         this._time -= 1;
+
         _.delay(_.bind(this._timer, this), 1000 - ((new Date().getTime()) - timestamp));
+      } else {
+        this.stop();
       }
     },
 
