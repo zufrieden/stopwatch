@@ -19,7 +19,7 @@ $(function() {
 var stopwatch = new StopWatch({
   time: {
     hours: 0,
-    minutes: 10,
+    minutes: 5,
     seconds: 0
   }
 });
