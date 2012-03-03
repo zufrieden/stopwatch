@@ -22,7 +22,7 @@
   _.extend(StopWatch.prototype, {
 
     // start timer
-    start: function() {
+    start: function(time) {
       this._started = true;
       this._timer();
     },
@@ -33,10 +33,15 @@
     },
 
     // reset timer
-    reset: function() {
+    reset: function(time) {
       // ensure timer is stopped
       if (this._started) {
         this.stop();
+      }
+
+      // set new time
+      if (time) {
+        this.options.time = time;
       }
 
       // reset time
