@@ -39,7 +39,7 @@ startTimer();
 var colorAnimation = function() {
   $('#brandable').animate({backgroundColor: 'red'}, 1000, function() {
     setTimeout(function() {
-      $('#brandable').animate({backgroundColor: 'yellow'}, 1000, function() {
+      $('#brandable').animate({backgroundColor: 'orange'}, 1000, function() {
         setTimeout(function() {
           $('#brandable').animate({backgroundColor: 'blue'}, 1000, function() {
             setTimeout(function() {

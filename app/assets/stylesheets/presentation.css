@@ -623,12 +623,22 @@ body     { pointer-events: none; }
     background-color: #008b00;
 }
 #brandable h1{
-    margin-top: 2.8em;
+    margin-top: 0em;
     font-size: 70px;
+    margin-bottom: 0.2em;
 }
 #brandable h2{
     text-align: center;
     padding: 0.3em 2em;
+}
+#brandable .logo_sw{
+    margin-left: 200px;
+    margin-top: 90px;
+    margin-bottom: 20px;
+    width: 86px;
+    height: 109px;
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
 }
 
 
@@ -641,12 +651,19 @@ body     { pointer-events: none; }
     margin-top: 1em;
 }
 
-#contact_us h1{
+#timer_contact_us h1{
 line-height: 1.2em;
 }
-#contact_us h2{
+#timer_contact_us h2{
 
 }
+
+#timer_contact_us .stopwatch{
+    margin: 1em 0;
+    font-size: 50px;
+    letter-spacing: -0.16em;
+}
+
 .contact_us{
     margin-top: 0.3em;
 }
