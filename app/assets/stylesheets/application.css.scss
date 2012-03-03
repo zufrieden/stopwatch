@@ -11,21 +11,46 @@
  *= require_self
 */
 
-
+$baseFontFamily : 'Helvetica';
 
 
 @import "bourbon";
 @import "bootstrap";
 @import "bootstrap-responsive";
 
+/* CLOCK */
 .stopwatch{
+  padding: 20% 0;
+  line-height: 60%;
   text-align: center;
+  width: 100%;
+  display: block;
+  vertical-align: middle;
+  letter-spacing: -0.08em;
 }
 .digit{
-  display: inline;
-  font-size: 16em;
-  line-height: 2em;
+  color: $black;  
+  margin: 0em;
+  padding: 0em;
 }
 .dash{
-  display: inline-block;
+
+}
+.dash_title{
+  display: none;
+}
+.days_dash{
+  display: none;
+}
+
+
+.actions{
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+  
+ text-align: center;
+  .btn-group{
+    display: inline-block;
+  }
 }

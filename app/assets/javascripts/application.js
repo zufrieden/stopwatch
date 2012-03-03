@@ -15,11 +15,16 @@
 //= require underscore
 //= require bootstrap
 //= require moment
+//= require jquery.fittext
+
+
 
 $(function() {
   var stopwatch = new StopWatch();
 
   stopwatch.start();
+
+  $(".stopwatch").fitText(0.5, { minFontSize: '20px'});
 });
 
 (function($, undefined) {
