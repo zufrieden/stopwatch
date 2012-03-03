@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 # Globals dependencies
 gem 'rails', '3.2.2'
 
+gem 'airbrake'
+
 # Assets dependencies
 group :assets do
   gem 'jquery-rails'
@@ -15,6 +17,8 @@ end
 
 # Production environment dependencies
 group :production, :staging do
+  gem 'pg'
+  gem 'thin'
 end
 
 # Development environment dependencies (also needed by test environement)
