@@ -631,6 +631,23 @@ body     { pointer-events: none; }
     padding: 0.3em 2em;
 }
 
+
+#tweeterwall{
+    text-align: center;
+    background-position: 50% 100%;
+    background-repeat: no-repeat;
+}
+#tweeterwall h1{
+    margin-top: 1em;
+}
+
+#contact_us h1{
+line-height: 1.2em;
+}
+#contact_us h2{
+
+}
+
 /* IMPRESS NOT SUPPORTED STYLES */
 
 .fallback-message {
