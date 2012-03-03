@@ -22,12 +22,23 @@
 //
 
 $(function() {
+  $(".stopwatch").fitText(0.5, { minFontSize: '20px'});
+
   var stopwatch = new StopWatch();
 
-  $('.btn.start').on('click', stopwatch.start);
-  $('.btn.stop').on('click', stopwatch.stop);
-  $('.btn.reset').on('click', stopwatch.reset);
-
-  $(".stopwatch").fitText(0.5, { minFontSize: '20px'});
+  PrivatePub.subscribe('/timer/action', function(data, channel) {
+    console.log(data);
+    switch(data.action) {
+      case 'start':
+        stopwatch.start(data.time);
+        break;
+      case 'stop':
+        stopwatch.stop();
+        break;
+      case 'reset':
+        stopwatch.reset(data.time);
+        break;
+    }
+  });
 });
 

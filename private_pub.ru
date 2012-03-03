@@ -1,8 +1,12 @@
 # Run with: rackup private_pub.ru -s thin -E production
-require "bundler/setup"
-require "yaml"
-require "faye"
-require "private_pub"
+require 'bundler/setup'
+require 'yaml'
+require 'faye'
+require 'private_pub'
 
-PrivatePub.load_config(File.expand_path("../config/private_pub.yml", __FILE__), ENV["RAILS_ENV"] || "development")
+Faye::Logging.log_level = :debug unless ENV['RAILS_ENV'] == 'production'
+Faye::WebSocket.load_adapter('thin')
+
+PrivatePub.load_config(File.expand_path('../config/private_pub.yml', __FILE__), ENV['RAILS_ENV'] || 'development')
+
 run PrivatePub.faye_app(ping: 20)

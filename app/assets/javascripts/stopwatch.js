@@ -23,12 +23,17 @@
 
     // start timer
     start: function(time) {
+      if (this._started || time) {
+        this.reset(time);
+      }
+
       this._started = true;
       this._timer();
     },
 
     // stop timer
     stop: function() {
+      clearTimeout(this._timerID);
       this._started = false;
     },
 
@@ -70,7 +75,7 @@
         this._render(this._time);
         this._time -= 1;
 
-        _.delay(_.bind(this._timer, this), 1000 - ((new Date().getTime()) - timestamp));
+        this._timerID = _.delay(_.bind(this._timer, this), 1000 - ((new Date().getTime()) - timestamp));
       // ensure timer is stopped if reach zero
       } else if (this._time < 0) {
         this.stop();
