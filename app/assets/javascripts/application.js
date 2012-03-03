@@ -26,7 +26,7 @@ $(function() {
 
   var stopwatch = new StopWatch();
 
-  $('.actions .btn').on('click', function() {
+  $('.timer-event').on('click', function() {
     var event = ($(this).attr('class').match(/start|stop|reset/) || [])[0];
 
     if (event) {

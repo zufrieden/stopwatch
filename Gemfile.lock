@@ -86,6 +86,7 @@ GEM
       ruby-hmac
     formatador (0.2.1)
     fssm (0.2.8.1)
+    git (1.2.5)
     guard (1.0.0)
       ffi (>= 0.5.0)
       thor (~> 0.14.6)
@@ -246,6 +247,7 @@ DEPENDENCIES
   bootstrap-sass (~> 2.0.1)
   bourbon (~> 1.4)
   compass (~> 0.12.rc)
+  git
   guard
   guard-bundler
   guard-livereload
