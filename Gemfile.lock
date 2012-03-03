@@ -48,16 +48,31 @@ GEM
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
+    cookiejar (0.3.0)
     daemons (1.1.8)
     diff-lcs (1.1.3)
+    em-http-request (0.3.0)
+      addressable (>= 2.0.0)
+      escape_utils
+      eventmachine (>= 0.12.9)
     em-websocket (0.3.6)
       addressable (>= 2.1.1)
       eventmachine (>= 0.12.9)
     erubis (2.7.0)
+    escape_utils (0.2.4)
     eventmachine (0.12.10)
     excon (0.6.6)
     execjs (1.3.0)
       multi_json (~> 1.0)
+    faye (0.8.0)
+      cookiejar (>= 0.3.0)
+      em-http-request (>= 0.3.0)
+      eventmachine (>= 0.12.0)
+      faye-websocket (>= 0.4.0)
+      rack (>= 1.0.0)
+      yajl-ruby (>= 1.0.0)
+    faye-websocket (0.4.1)
+      eventmachine (>= 0.12.0)
     ffi (1.0.11)
     fog (0.9.0)
       builder
@@ -121,6 +136,8 @@ GEM
     nokogiri (1.5.0)
     pg (0.13.2)
     polyglot (0.3.3)
+    private_pub (1.0.1)
+      faye
     pry (0.9.8.3)
       coderay (~> 1.0.5)
       method_source (~> 0.7.1)
@@ -217,6 +234,7 @@ GEM
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
     unicode-display_width (0.1.1)
+    yajl-ruby (1.1.0)
     yard (0.7.5)
 
 PLATFORMS
@@ -238,6 +256,7 @@ DEPENDENCIES
   hirb-unicode
   jquery-rails
   pg
+  private_pub
   pry-rails
   pry-remote
   rails (= 3.2.2)
