@@ -26,9 +26,24 @@ $(function() {
 
   var stopwatch = new StopWatch();
 
-  PrivatePub.subscribe('/timer/action', function(data, channel) {
-    console.log(data);
-    switch(data.action) {
+  $('.actions .btn').on('click', function() {
+    var event = ($(this).attr('class').match(/start|stop|reset/) || [])[0];
+
+    if (event) {
+      $.ajax({
+        url: '/timer/event',
+        type: 'POST',
+        contentType: 'application/json',
+        dataType: 'json',
+        data: JSON.stringify({timer: {
+          event: event
+        }})
+      });
+    }
+  });
+
+  PrivatePub.subscribe('/timer/event', function(data, channel) {
+    switch(data.event) {
       case 'start':
         stopwatch.start(data.time);
         break;
