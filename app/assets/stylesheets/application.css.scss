@@ -11,31 +11,61 @@
  *= require_self
 */
 
-$baseFontFamily : 'Helvetica';
+$red:                             #9d261d;
+$linkColor:                       $red;
+
+$baseFontFamily :                 'Helvetica';
+$navbarBackground:                #fff;
+$navbarBackgroundHighlight:       #fff;
+$navbarLinkBackgroundHover:       transparent;
+
+$navbarText:                      #000;
+$navbarLinkColor:                 #000;
+$navbarLinkColorHover:            $red;
 
 
 @import "bourbon";
 @import "bootstrap";
 @import "bootstrap-responsive";
-
+@import "theme";
 
 /* BRAND */
-.brand{
-  font-size: 1.4em;
+.logo{
+  display: block;
+  float: left;
+  background: image-url('logo_stopwatch.png') no-repeat 0 50%;
+  width: 150px;
+  height: 30px;
+  margin-left: 10px;
+  margin-top: 6px;
+}
+.logo strong{
+  display: none;
 }
 .navbar-inner{
   text-transform: uppercase;
+  background-color: $white;
+  background-image: none;
+  @include box-shadow(0 0px 0px rgba(0,0,0,0));
+  li a{
+    cursor: pointer;
+  }
+}
+
+/* HashTag */
+.tools{
+  margin-top: 1em;
 }
 
 /* CLOCK */
 .stopwatch{
   padding: 20% 0;
-  line-height: 60%;
+  line-height: auto;
   text-align: center;
   width: 100%;
   display: block;
   vertical-align: middle;
-  letter-spacing: -0.08em;
+  letter-spacing: -0.14em;
 }
 .digit{
   color: $black;  
@@ -46,12 +76,32 @@ $baseFontFamily : 'Helvetica';
 
 }
 .dash_title{
-  color: $grayLight;
+  color: $black;
 }
 .days_dash{
   display: none;
   letter-spacing: -0.3em;
 }
+
+/* VISUAL TIMER */
+.inner-line{
+  background-color: $red;
+  height: 100%;
+  width: 50%;
+}
+.line{
+  width: 100%;
+  height:4%;
+  position: fixed;
+  bottom:0;
+  left:0;
+}
+
+/* TWITTER WALL */
+.twitter_feed{
+  display: none;
+}
+
 
 /* ACTIONS */
 .actions{
