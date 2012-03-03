@@ -1,6 +1,5 @@
 //= require jquery
 //= require underscore
-//= require moment
 
 (function($, undefined) {
   StopWatch = window.StopWatch = function(options) {
@@ -28,8 +27,13 @@
         this.stop();
       }
 
-      this._time = Math.round(moment().add(this.options.time).diff(moment()) / 1000);
-      this._render(moment().add('milliseconds', this._time).diff(moment()));
+      this._time = 0;
+      this._time += (this.options.time.days || 0) * 24 * 60 * 60;
+      this._time += (this.options.time.hours || 0) * 60 * 60;
+      this._time += (this.options.time.minutes || 0) * 60;
+      this._time += (this.options.time.seconds || 0);
+
+      this._render(this._time);
     },
 
     // start timer
