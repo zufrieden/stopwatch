@@ -49,9 +49,12 @@ $(function() {
 
     // reset timer
     reset: function() {
-      this.stop();
-      this._endAt = moment().add(this.options.time);
-      this._render(((this._endAt.diff(moment())) / 1000));
+      if (this._started) {
+        this.stop();
+      }
+
+      this._time = Math.round(moment().add(this.options.time).diff(moment()) / 1000);
+      this._render(moment().add('milliseconds', this._time).diff(moment()));
     },
 
     // start timer
@@ -68,8 +71,10 @@ $(function() {
     // update timer
     _timer: function() {
       if (this._started) {
-        this._render(((this._endAt.diff(moment())) / 1000));
-        _.delay(_.bind(this._timer, this), 1000);
+        var timestamp = new Date().getTime();
+        this._render(this._time);
+        this._time -= 1;
+        _.delay(_.bind(this._timer, this), 1000 - ((new Date().getTime()) - timestamp));
       }
     },
 
