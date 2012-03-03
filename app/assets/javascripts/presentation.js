@@ -10,3 +10,26 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require impress
+//= require stopwatch
+//
+
+var stopwatch = new StopWatch({
+  time: {
+    hours: 0,
+    minutes: 10,
+    seconds: 0
+  }
+});
+
+var startTimer = function() {
+  if (window.location.hash.match(/\/timer/)) {
+    setTimeout(function() {
+      stopwatch._time -= 1;
+      stopwatch.start();
+    }, 350);
+  } else {
+    setTimeout(startTimer, 100);
+  }
+}
+startTimer();
+
