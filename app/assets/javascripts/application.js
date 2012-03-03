@@ -17,25 +17,31 @@
 //= require moment
 //= require jquery.fittext
 
-
-
 $(function() {
   var stopwatch = new StopWatch();
 
-  stopwatch.start();
+  $('.btn.start').on('click', stopwatch.start);
+  $('.btn.stop').on('click', stopwatch.stop);
+  $('.btn.reset').on('click', stopwatch.reset);
 
   $(".stopwatch").fitText(0.5, { minFontSize: '20px'});
 });
 
 (function($, undefined) {
   StopWatch = window.StopWatch = function(options) {
+    _.bindAll(this, 'start', 'stop', 'reset');
+
+    // default options
     this.options = _.extend({
       el:  $('.stopwatch'),
       time: { minutes: 5, seconds: 30 }
     }, (options || {}));
 
+    // init attributes
     this.el = this.options.el;
+    this._started = false;
 
+    // reset timer
     this.reset();
   }
 
@@ -43,22 +49,32 @@ $(function() {
 
     // reset timer
     reset: function() {
+      this.stop();
       this._endAt = moment().add(this.options.time);
-      this._render();
+      this._render(((this._endAt.diff(moment())) / 1000));
     },
 
     // start timer
     start: function() {
+      this._started = true;
+      this._timer();
+    },
+
+    // stop timer
+    stop: function() {
+      this._started = false;
     },
 
     // update timer
     _timer: function() {
+      if (this._started) {
+        this._render(((this._endAt.diff(moment())) / 1000));
+        _.delay(_.bind(this._timer, this), 1000);
+      }
     },
 
     // render timer
-    _render: function() {
-      var diff = this._endAt.diff(moment()) / 1000;
-
+    _render: function(diff) {
       var that = this;
       _.each(['days', 'hours', 'minutes', 'seconds'], function(dash) {
         var digit;
