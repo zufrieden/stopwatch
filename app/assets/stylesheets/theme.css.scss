@@ -10,12 +10,13 @@
 }
 
 
+
 // responsive
 @media (max-width: 979px) {
   .navbar .nav{
     margin-top: 1em;
   }
-  .navbar .nav > li > a{
-    background-color: $grayLighter;
+  .navbar .nav > li > a, .navbar .nav .active > a:hover, .navbar .nav > a:hover {
+    background-color: $grayLighter !important;
   }
 }
