@@ -16,7 +16,7 @@
 
    jQuery(document).ready(function() {
       
-      $('#countdown_dashboard').countDown({
+      $('.stopwatch').countDown({
          targetDate: {
             'day':   4,
             'month': 3,
