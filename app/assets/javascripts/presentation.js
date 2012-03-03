@@ -9,9 +9,12 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
+//= require jquery
+//= require jquery.ui
 //= require impress
 //= require stopwatch
 //
+$(function() {
 
 var stopwatch = new StopWatch({
   time: {
@@ -32,4 +35,27 @@ var startTimer = function() {
   }
 }
 startTimer();
+
+var colorAnimation = function() {
+  $('#brandable').animate({backgroundColor: 'red'}, 1000, function() {
+    setTimeout(function() {
+      $('#brandable').animate({backgroundColor: 'yellow'}, 1000, function() {
+        setTimeout(function() {
+          $('#brandable').animate({backgroundColor: 'blue'}, 1000, function() {
+            setTimeout(function() {
+              $('#brandable').animate({backgroundColor: 'green'}, 1000, function() {
+                setTimeout(function() {
+                  colorAnimation();
+                }, 1000);
+              });
+            }, 1000);
+          });
+        }, 1000);
+      });
+    }, 1000);
+  });
+}
+colorAnimation();
+
+});
 
