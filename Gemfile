@@ -39,12 +39,12 @@ group :development, :test do
 
   gem 'redcarpet'
   gem 'yard', '~> 0.7.5'
-
-  gem 'heroku'
 end
 
 # Dependencies should be load only in development environment
 group :development do
+  gem 'git'
+  gem 'heroku'
 end
 
 # Guard dependencies
