@@ -59,7 +59,7 @@ $navbarLinkColorHover:            $red;
 
 /* CLOCK */
 .stopwatch{
-  padding: 20% 0;
+  padding: 20% 0 18%;
   line-height: auto;
   text-align: center;
   width: 100%;
@@ -99,9 +99,29 @@ $navbarLinkColorHover:            $red;
 
 /* TWITTER WALL */
 .twitter_feed{
-  display: none;
+  background-color: $grayLighter;
 }
-
+.twitter_hash{
+  padding: 1em;
+}
+.tweet{
+  min-height:190px;
+  padding-right: 1em;
+  p{
+    padding: 0.4em 0;
+    font-size: 2.4em;
+    line-height: 1.2em;
+  }
+}
+.profile_pic{
+  float: left;
+  margin-right: 1em;
+}
+@media (max-width: 979px) {
+  .twitter_feed{
+    display: none;
+  }
+}
 
 /* ACTIONS */
 .actions{

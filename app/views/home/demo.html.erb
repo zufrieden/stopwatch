@@ -1,122 +1,118 @@
 
 
 <div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container" style="width: auto;">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-      <a class="logo"><strong>stopwat.ch</strong></a>
-      <div class="nav-collapse">
-        <ul class="nav pull-right">
-          <li><a class="start"> start <i class="icon-play"></i></a></li>
-          <li><a class="stop"> stop <i class="icon-stop"></i></a></li>
-          <li><a class="reset"> reset <i class=" icon-repeat"></i></a></li>
-          <li class="divider-vertical"></li>
-          <li><a href="#configure" data-toggle="modal"> Admin <i class="icon-cog"></i></a></li>
-        </ul>
-      </div><!-- /.nav-collapse -->
-    </div>
-  </div><!-- /navbar-inner -->
+<div class="navbar-inner">
+  <div class="container" style="width: auto;">
+    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </a>
+    <a class="logo"><strong>stopwat.ch</strong></a>
+    <div class="nav-collapse">
+      <ul class="nav pull-right">
+        <li><a class="start"> start <i class="icon-play"></i></a></li>
+        <li><a class="stop"> stop <i class="icon-stop"></i></a></li>
+        <li><a class="reset"> reset <i class=" icon-repeat"></i></a></li>
+        <li class="divider-vertical"></li>
+        <li><a href="#configure" data-toggle="modal"> Admin <i class="icon-cog"></i></a></li>
+      </ul>
+    </div><!-- /.nav-collapse -->
+  </div>
+</div><!-- /navbar-inner -->
 </div>
 
 
 <div class="stopwatch">
-  <time class="dash days_dash">
-    <span class="digit">0</span>
-    <span class="digit">0</span>
-    <span class="dash_title">j</span>
-  </time>
-  <time class="dash hours_dash">
-    <span class="digit">0</span>
-    <span class="digit">0</span>
-    <span class="dash_title">.</span>
-  </time>
-  <time class="dash minutes_dash">
-    <span class="digit">0</span>
-    <span class="digit">0</span>
-    <span class="dash_title">.</span>
-  </time>
-  <time class="dash seconds_dash">
-    <span class="digit">0</span>
-    <span class="digit">0</span>
-  </time>
-  <div class="line"><div class="inner-line"></div></div>
+<time class="dash days_dash">
+  <span class="digit">0</span>
+  <span class="digit">0</span>
+  <span class="dash_title">j</span>
+</time>
+<time class="dash hours_dash">
+  <span class="digit">0</span>
+  <span class="digit">0</span>
+  <span class="dash_title">.</span>
+</time>
+<time class="dash minutes_dash">
+  <span class="digit">0</span>
+  <span class="digit">0</span>
+  <span class="dash_title">.</span>
+</time>
+<time class="dash seconds_dash">
+  <span class="digit">0</span>
+  <span class="digit">0</span>
+</time>
+<div class="line"><div class="inner-line"></div></div>
 </div>
 
-<div class="fluid-row twitter_feed">
-  <div class="span12">
-    <h1>#hashtag</h1>
+
+<div class="twitter_feed">
+  <div class="profile_pic">
+    <img src="http://placekitten.com/190/190"/>
+  </div>    
+  <div class="tweet">
+    <p>@xavieralexandre ratio size of the cross to the height is 5:8, a ratio of 2:3 to the span of the flag is usual. #swissflag #swlau #precision</p>
+     <p><a href="#">@startupweekendCH</a> 1 minute ago</p>
   </div>
+  <div style="clear:both;"></div>
 </div>
 
-<div class="fluid-row twitter_feed">
-  <div class="span12">
-    <div class="profile">
-      <img src="http://placekitten.com/200/200"/>
-    </div>    
-    <div class="tweet">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore <a href="#asd">asdasdasd</a> magna aliqua. Ut enim ad minim veniam.</p>
-        <p>by <a href="#">@startupweekendCH</a> 1 minute ago</p>
-      </div>
-    </div>
+
+
+
+
+
+
+<div class="modal" id="configure" style="display:none;">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h3>Configure your timer</h3>
   </div>
 
+  
 
-
-
-  <div class="modal" id="configure" style="display:none;">
-    <div class="modal-header">
-      <a class="close" data-dismiss="modal">×</a>
-      <h3>Configure your timer</h3>
+  <form class="form-horizontal">
+    <div class="modal-body">
+      <fieldset>
+        <div class="control-group">
+          <label class="control-label" for="time">Time</label>
+          <div class="controls">
+            <input class="input-mini focused" id="hour" type="text" value="" placeholder="HH">
+            <input class="input-mini" id="minutes" type="text" value="" placeholder="MM">
+            <input class="input-mini" id="secondes" type="text" value="" placeholder="SS">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="hashtag">#hashtag</label>
+          <div class="controls">
+            <input class="input-xlarge" id="hashtag" type="text" placeholder="#hashtag">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">Public URL</label>
+          <div class="controls">
+            <span class="help-inline"><a href="http://stopwat.ch/swalau" target="_blank">http://stopwat.ch/swalau</a></span>
+            <a class="btn" href="http://chart.apis.google.com/chart?cht=qr&chs=150x150&choe=UTF-8&chld=H&chl="><i class="icon-qrcode"></i> View QR Code</a>
+          </div>
+        </div>  
+        <div class="control-group">
+          <label class="control-label">Administration URL</label>
+          <div class="controls">
+            <span class="help-inline"><a href="http://stopwat.ch/swalau" target="_blank">http://stopwat.ch/swalauads8y91h2iu</a></span>
+            <a class="btn" href="http://chart.apis.google.com/chart?cht=qr&chs=150x150&choe=UTF-8&chld=H&chl="><i class="icon-qrcode"></i> View QR Code</a>
+          </div>
+        </div>  
+      </fieldset>
     </div>
-
-    
-
-    <form class="form-horizontal">
-      <div class="modal-body">
-        <fieldset>
-          <div class="control-group">
-            <label class="control-label" for="time">Time</label>
-            <div class="controls">
-              <input class="input-mini focused" id="hour" type="text" value="" placeholder="HH">
-              <input class="input-mini" id="minutes" type="text" value="" placeholder="MM">
-              <input class="input-mini" id="secondes" type="text" value="" placeholder="SS">
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="hashtag">#hashtag</label>
-            <div class="controls">
-              <input class="input-xlarge" id="hashtag" type="text" placeholder="#hashtag">
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label">Public URL</label>
-            <div class="controls">
-              <span class="help-inline"><a href="http://stopwat.ch/swalau" target="_blank">http://stopwat.ch/swalau</a></span>
-              <a class="btn" href=""><i class="icon-qrcode"></i> View QR Code</a>
-            </div>
-          </div>  
-          <div class="control-group">
-            <label class="control-label">Administration URL</label>
-            <div class="controls">
-              <span class="help-inline"><a href="http://stopwat.ch/swalau" target="_blank">http://stopwat.ch/swalauads8y91h2iu</a></span>
-              <a class="btn" href=""><i class="icon-qrcode"></i> View QR Code</a>
-            </div>
-          </div>  
-        </fieldset>
-      </div>
-      <div class="form-actions" class="modal-footer">
-        <button type="submit" class="btn btn-primary">Save changes</button>
-        <button class="btn" data-dismiss="modal">Cancel</button>
-      </div>
-    </form>
+    <div class="form-actions" class="modal-footer">
+      <button type="submit" class="btn btn-primary">Save changes</button>
+      <button class="btn" data-dismiss="modal">Cancel</button>
+    </div>
+  </form>
 
 
-  </div>
+</div>
 
 
 <%= subscribe_to "/timer/event" %>
