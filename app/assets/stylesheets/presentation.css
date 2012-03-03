@@ -519,7 +519,6 @@ body     { pointer-events: none; }
 .dotslide h1{
     text-align: center;
     color: #fff;
-
     font-size: 50px;
     line-height: 50px;
 }
@@ -578,6 +577,58 @@ body     { pointer-events: none; }
 }
 .title_slide strong{
     color: #f00;
+}
+.title_slide h2{
+    font-size: 40px;
+    line-height: auto;
+    margin: 0.6em 0;
+}
+
+#over_devices_sync h1{
+    margin-top: 1em;
+    font-size: 70px;
+    margin-bottom: 0.8em;
+}
+#over_devices_sync h2{
+    font-size: 30px;
+}
+#timer_projector{
+    background-color: transparent;
+}
+#timer_projector h1{
+    margin-top: 0em;
+}
+.projector_timer{
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+    width:340px;
+    height: 320px;
+}
+.projector_timer .stopwatch{
+    padding: 110px 0 0 96px;
+}
+.iphone_timer{
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+    width:364px;
+    height: 432px;
+}
+.iphone_timer .stopwatch{
+    padding: 130px 0 0 193px;
+    font-size: 20px;
+}
+
+
+#brandable{
+    background-color: #008b00;
+}
+#brandable h1{
+    margin-top: 2.8em;
+    font-size: 70px;
+}
+#brandable h2{
+    text-align: center;
+    padding: 0.3em 2em;
 }
 
 /* IMPRESS NOT SUPPORTED STYLES */
