@@ -57,6 +57,7 @@
         this._time += (this.options.time.minutes || 0) * 60;
         this._time += (this.options.time.seconds || 0);
       }
+      this._timerLength = this._time;
 
       // reset timer view
       this._render(this._time);
@@ -86,6 +87,7 @@
     //
     // @param [Integer] diff timer value to rending
     _render: function(diff) {
+      // render digits
       var that = this;
       _.each(['days', 'hours', 'minutes', 'seconds'], function(dash) {
         var digit;
@@ -107,6 +109,9 @@
 
         that._renderDash(dash, digit);
       });
+
+      // render progress bar
+      this.el.find('.line .inner-line').css({ width: 100 - Math.round((diff / this._timerLength) * 100) + '%' });
     },
 
     // render timer dash view
