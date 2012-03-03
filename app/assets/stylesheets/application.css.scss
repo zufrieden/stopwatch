@@ -18,6 +18,15 @@ $baseFontFamily : 'Helvetica';
 @import "bootstrap";
 @import "bootstrap-responsive";
 
+
+/* BRAND */
+.brand{
+  font-size: 1.4em;
+}
+.navbar-inner{
+  text-transform: uppercase;
+}
+
 /* CLOCK */
 .stopwatch{
   padding: 20% 0;
@@ -37,18 +46,19 @@ $baseFontFamily : 'Helvetica';
 
 }
 .dash_title{
-  display: none;
+  color: $grayLight;
 }
 .days_dash{
   display: none;
+  letter-spacing: -0.3em;
 }
 
-
+/* ACTIONS */
 .actions{
   position: fixed;
   bottom: 10px;
   width: 100%;
-  
+
  text-align: center;
   .btn-group{
     display: inline-block;
