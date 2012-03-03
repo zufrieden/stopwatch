@@ -16,6 +16,8 @@
 //= require bootstrap
 //= require jquery.fittext
 //
+//= require private_pub
+//
 //= require stopwatch
 //
 
