@@ -30,8 +30,11 @@ $(function() {
 (function($, undefined) {
   StopWatch = window.StopWatch = function(options) {
     this.options = _.extend({
+      el:  $('.stopwatch'),
       time: { minutes: 5, seconds: 30 }
     }, (options || {}));
+
+    this.el = this.options.el;
 
     this.reset();
   }
@@ -41,6 +44,7 @@ $(function() {
     // reset timer
     reset: function() {
       this._endAt = moment().add(this.options.time);
+      this._render();
     },
 
     // start timer
@@ -49,6 +53,38 @@ $(function() {
 
     // update timer
     _timer: function() {
+    },
+
+    // render timer
+    _render: function() {
+      var diff = this._endAt.diff(moment()) / 1000;
+
+      var that = this;
+      _.each(['days', 'hours', 'minutes', 'seconds'], function(dash) {
+        var digit;
+
+        switch(dash) {
+          case 'days':
+            digit = Math.floor(diff/60/60/24);
+            break;
+          case 'hours':
+            digit = Math.floor(diff/60/60) % 60;
+            break;
+          case 'minutes':
+            digit = Math.floor(diff/60) % 60;
+            break;
+          case 'seconds':
+            digit = Math.floor(diff) % 60;
+            break;
+        }
+
+        that._renderDash(dash, digit);
+      });
+    },
+
+    _renderDash: function(dash, digit) {
+      this.el.find('.dash.' + dash + '_dash .digit:first').html((digit - (digit % 10)) / 10);
+      this.el.find('.dash.' + dash + '_dash .digit:last').html((digit % 10));
     }
 
   });
