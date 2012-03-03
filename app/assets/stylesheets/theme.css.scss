@@ -3,9 +3,19 @@
   text-shadow: none;
 }
 
-
 .btn-navbar {
   @include buttonBackground($navbarLinkColorHover, $navbarLinkColorHover);
   $shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 0 rgba(255,255,255,.075);
   @include box-shadow($shadow);
+}
+
+
+// responsive
+@media (max-width: 979px) {
+  .navbar .nav{
+    margin-top: 1em;
+  }
+  .navbar .nav > li > a{
+    background-color: $grayLighter;
+  }
 }
