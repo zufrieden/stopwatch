@@ -118,9 +118,9 @@
 <%= javascript_tag do %>
   var timerData = '<%=raw({
     time: {
-      hours: (@timer.time / 60 / 60).floor % 60,
-      minutes: (@timer.time / 60).floor % 60,
-      seconds: (@timer.time).floor % 60,
+      hours: @timer.time && (@timer.time / 60 / 60).floor % 60,
+      minutes: @timer.time && (@timer.time / 60).floor % 60,
+      seconds: @timer.time && (@timer.time).floor % 60,
     },
     twitterHashtag: @timer.twitter_hashtag
   }.to_json) %>'
