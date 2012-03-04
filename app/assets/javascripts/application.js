@@ -128,7 +128,7 @@ $(function() {
         $('.twitter_feed .tweet p:last a').html('@' + tweet.from_user);
         $('.twitter_feed .tweet p:last').html('<a href="http://www.twitter.com/' + tweet.from_user +'">@' + tweet.from_user + '</a> ' + moment(tweet.created_at).fromNow());
 
-        _.delay(updateTweets, 5000);
+        _.delay(updateTweets, 7000);
     });
   }
   updateTweets();
