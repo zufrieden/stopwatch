@@ -25,13 +25,14 @@ $(function() {
   $(".stopwatch").fitText(0.5, { minFontSize: '20px'});
 
   var stopwatch = new StopWatch();
+  var timer_url_key = window.location.pathname.match(/^\/(timer\/)?([^\/]+)/)[2]
 
   $('.timer-event').on('click', function() {
     var event = ($(this).attr('class').match(/start|stop|reset/) || [])[0];
 
     if (event) {
       $.ajax({
-        url: '/timer/event',
+        url: '/timer/' + timer_url_key + '/event',
         type: 'POST',
         contentType: 'application/json',
         dataType: 'json',
@@ -42,7 +43,7 @@ $(function() {
     }
   });
 
-  PrivatePub.subscribe('/timer/event', function(data, channel) {
+  PrivatePub.subscribe('/timer/' + timer_url_key + '/event', function(data, channel) {
     switch(data.event) {
       case 'start':
         stopwatch.start(data.time);

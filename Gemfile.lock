@@ -64,6 +64,16 @@ GEM
     excon (0.6.6)
     execjs (1.3.0)
       multi_json (~> 1.0)
+    factory-girl-matchers (1.0.0.rc1)
+      factory_girl (>= 2.6)
+      rspec (>= 2.0)
+    factory_girl (2.6.0)
+      activesupport (>= 2.3.9)
+    factory_girl_rails (1.7.0)
+      factory_girl (~> 2.6.0)
+      railties (>= 3.0.0)
+    faker (1.0.1)
+      i18n (~> 0.4)
     faye (0.8.0)
       cookiejar (>= 0.3.0)
       em-http-request (>= 0.3.0)
@@ -129,6 +139,10 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     method_source (0.7.1)
+    migrant (1.3.1)
+      faker
+      rails (>= 3.0.0)
+      term-ansicolor
     mime-types (1.17.2)
     multi_json (1.1.0)
     net-scp (1.0.4)
@@ -209,6 +223,7 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    shoulda-matchers (1.0.0)
     simplecov (0.6.1)
       multi_json (~> 1.0)
       simplecov-html (~> 0.5.3)
@@ -247,6 +262,9 @@ DEPENDENCIES
   bootstrap-sass (~> 2.0.1)
   bourbon (~> 1.4)
   compass (~> 0.12.rc)
+  factory-girl-matchers (>= 1.0.0.rc1)
+  factory_girl_rails
+  faker
   git
   guard
   guard-bundler
@@ -257,6 +275,7 @@ DEPENDENCIES
   heroku
   hirb-unicode
   jquery-rails
+  migrant
   pg
   private_pub
   pry-rails
@@ -269,6 +288,7 @@ DEPENDENCIES
   ruby-debug19
   ruby_gntp
   sass-rails (~> 3.2)
+  shoulda-matchers
   simplecov
   spork (~> 0.9.0)
   sqlite3
