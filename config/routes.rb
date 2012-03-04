@@ -4,6 +4,7 @@ Stopwatch::Application.routes.draw do
 
   match '/demo' => 'home#demo'
   match '/presentation' => 'home#presentation'
+  match '/startup' => 'home#startup'
 
   root :to => 'home#presentation'
 

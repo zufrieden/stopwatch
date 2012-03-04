@@ -1,0 +1,182 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    
+    <title>Stopwatch</title>
+    <%= stylesheet_link_tag    "presentation", :media => "all" %>
+    
+    <%= csrf_meta_tags %>
+
+    
+    
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+<body>
+
+
+<div id="impress" class="impress-not-supported">
+
+    <div class="fallback-message">
+        <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+        <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser. Upcoming version 10 of Internet Explorer <i>should</i> also handle it.</p>
+    </div>
+
+
+    <div id="need-a-timer" class="step slide" data-x="-800" data-y="-3460" data-z="-30000">
+        <h2>YOUR</h2>
+        <h1><strong>STARTUP</strong> WEEKEND</h1>
+        <h3>NEEDS A NEW TIMER</h3>
+        <small>Press <strong>SPACE BAR</strong> to start</small>
+    </div>
+
+    <div id="swiss-quality" class="step slide dotslide" data-x="-800" data-y="-3460" data-z="-20000">
+        <small>first things first...</small>
+        <h1>SWISS = ON TIME</h1>
+    </div>
+
+    <div id="logo" class="step slide" data-x="0" data-y="0">
+        <h1>stopwat<span><strong>.</strong></span>ch</h1>
+        <h2>The perfect timer for your Startup Weekend</h2>
+    </div>
+
+    <div id="timer" class="step slide" data-x="0" data-y="500" data-z="0">
+        <h1>Let's start the timer</h1>
+        <div class="stopwatch">
+            <time class="dash hours_dash">
+                <span class="digit">0</span>
+                <span class="digit">0</span>
+                <span class="dash_title">.</span>
+            </time>
+            <time class="dash minutes_dash">
+                <span class="digit">0</span>
+                <span class="digit">0</span>
+                <span class="dash_title">.</span>
+            </time>
+            <time class="dash seconds_dash">
+                <span class="digit">0</span>
+                <span class="digit">0</span>
+            </time>
+        </div>
+    </div>
+
+    <div id="how_better" class="step slide title_slide" data-x="0" data-y="1500" data-z="0">
+        <h1>How <strong>good</strong><br/> is your timer?</h1>
+    </div>
+
+    <div id="over_devices_sync" class="step slide title_slide" data-x="1000" data-y="2500" data-z="0"  data-rotate="90">
+        <h1>Synchronized on every device</h1>
+        <h2>Show it on the big screen</h2>
+        <h2>Start it on your iPhone</h2>
+        <h2>Display it on a tablet</h2>
+        <h2>...</h2>
+    </div>
+
+    <div id="timer_projector" class="step slide title_slide" data-x="1000" data-y="3500" data-z="0"  data-rotate="90">
+        <h2>On the projector</h2>
+        <div style="background-image:url('assets/pres_screen.png');" class="projector_timer">
+            <div class="stopwatch">
+                <time class="dash hours_dash">
+                    <span class="digit">0</span>
+                    <span class="digit">0</span>
+                    <span class="dash_title">.</span>
+                </time>
+                <time class="dash minutes_dash">
+                    <span class="digit">0</span>
+                    <span class="digit">0</span>
+                    <span class="dash_title">.</span>
+                </time>
+                <time class="dash seconds_dash">
+                    <span class="digit">0</span>
+                    <span class="digit">0</span>
+                </time>
+            </div>
+        </div>
+    </div>
+
+    <div id="timer_iphone" class="step slide title_slide" data-x="1000" data-y="4100" data-z="0"  data-rotate="90">
+        <h2>In perfect sync on your mobile</h2>
+        <div style="background-image:url('assets/pres_iphone_hand.png');" class="iphone_timer">
+            <div class="stopwatch">
+                <time class="dash hours_dash">
+                    <span class="digit">0</span>
+                    <span class="digit">0</span>
+                    <span class="dash_title">.</span>
+                </time>
+                <time class="dash minutes_dash">
+                    <span class="digit">0</span>
+                    <span class="digit">0</span>
+                    <span class="dash_title">.</span>
+                </time>
+                <time class="dash seconds_dash">
+                    <span class="digit">0</span>
+                    <span class="digit">0</span>
+                </time>
+            </div>
+        </div>
+    </div>
+
+    <div id="brandable"  class="step slide dotslide"  data-x="0" data-y="2500" data-z="0">
+        <div style="background-image:url('assets/pres_sw_logo.png');" class="logo_sw"></div>
+        <h1>brandable</h1>
+        <h2>your logo, your colors <br/>and your music</h2>
+    </div>
+
+
+    <div id="remote_management"  class="step slide title_slide"  data-x="-1500" data-y="2500" data-z="0">
+        <h1>Remote management</h1>
+        <h2>start, stop and reset from your mobile</h2>
+    </div>
+
+    <div id="tweeterwall"  class="step slide title_slide"  data-x="-1500" data-y="1500" data-z="0"  style="background-image:url('assets/twitter.png');">
+        <h1>Twitter integration</h1>
+        <h2>Display your twitter wall using your #hashtag</h2>
+    </div>
+
+
+    <div id="timer_contact_us" class="step slide content_slide" data-x="0" data-y="1000" data-z="0">
+        <h1>Do we really need to spend <br/>more time convincing you?</h1>
+
+            <div class="stopwatch">
+                <time class="dash hours_dash">
+                    <span class="digit">0</span>
+                    <span class="digit">0</span>
+                    <span class="dash_title">.</span>
+                </time>
+                <time class="dash minutes_dash">
+                    <span class="digit">0</span>
+                    <span class="digit">0</span>
+                    <span class="dash_title">.</span>
+                </time>
+                <time class="dash seconds_dash">
+                    <span class="digit">0</span>
+                    <span class="digit">0</span>
+                </time>
+            </div>
+
+        <p>We will deliver the full working solution<br/> by the end of this week-end.</p>
+        <p class="contact_us">Contact us <a href="http://www.twitter.com/swissstopwatch">@swissstopwatch</a></p>
+    </div>
+
+
+</div>
+
+<div class="hint">
+    <p>Use a spacebar or arrow keys to navigate</p>
+</div>
+<script>
+if ("ontouchstart" in document.documentElement) { 
+    document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+}
+</script>
+
+
+<%= javascript_include_tag "presentation" %>
+<script>impress();</script>
+
+
+</body>
+</html>
