@@ -108,6 +108,7 @@ $navbarLinkColorHover:            $red;
 .tweet{
   min-height:190px;
   padding-right: 1em;
+  margin-left: 240px;
   p{
     padding: 0.4em 0;
     font-size: 3em;
@@ -116,10 +117,14 @@ $navbarLinkColorHover:            $red;
 }
 .profile_pic{
   float: left;
-  margin-right: 1em;
+  margin-right: 2em;
+  padding: 20px;
+}
+.twitter_feed_display{
+  display: block;
 }
 @media (max-width: 979px) {
-  .twitter_feed{
+  .twitter_feed, .twitter_feed_display{
     display: none;
   }
 }
