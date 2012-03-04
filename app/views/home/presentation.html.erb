@@ -8,6 +8,7 @@
     
     <title>Stopwat.ch - your perfect conference timer</title>
     <%= stylesheet_link_tag    "presentation", :media => "all" %>
+    <%= javascript_include_tag "presentation" %>
     
     <%= csrf_meta_tags %>
     
@@ -348,10 +349,10 @@ if ("ontouchstart" in document.documentElement) {
 </script>
 
 
-<%= javascript_include_tag "presentation" %>
+<%= javascript_include_tag "impress" %>
 <script>impress();</script>
-<%= subscribe_to "/timer/m2/event" %>
 
+<%= subscribe_to "/timer/m2/event" %>
 
 </body>
 </html>

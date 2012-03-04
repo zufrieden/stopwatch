@@ -11,8 +11,10 @@
 //
 //= require jquery
 //= require jquery.ui
-//= require impress
+//= require moment
+//
 //= require private_pub
+//
 //= require stopwatch
 //
 $(function() {
