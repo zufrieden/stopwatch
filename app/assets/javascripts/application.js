@@ -28,6 +28,8 @@ $(function() {
   var stopwatch = new StopWatch(JSON.parse(timerData));
   var timer_url_key = window.location.pathname.match(/^\/(timer\/)?([^\/]+)/)[2]
 
+  var lastTweetID, tweets = [];
+
   $('.timer-event').on('click', function() {
     var event = ($(this).attr('class').match(/start|stop|reset/) || [])[0];
 
@@ -90,8 +92,8 @@ $(function() {
     stopwatch.setTwitterHashtag(options.twitter_hashtag);
     stopwatch.reset(options.time);
 
-    // launch tweets update
-    updateTweets();
+    // reset tweets
+    tweets = [], lastTweetID = null;
 
     // close modal
     $('#configure').modal('hide');
@@ -110,7 +112,6 @@ $(function() {
   });
 
   // twitter integration
-  var lastTweetID, tweets = [];
   var updateTweets = function() {
     if (stopwatch.options.twitterHashtag) {
       $.getJSON('http://search.twitter.com/search.json?q=' + stopwatch.options.twitterHashtag + '&since_id=' + lastTweetID + '&result_type=recent&rpp=100&include_entities=true&callback=?',
@@ -131,11 +132,13 @@ $(function() {
           $('.twitter_feed .tweet p:first').html(tweet.text);
           $('.twitter_feed .tweet p:last a').html('@' + tweet.from_user);
           $('.twitter_feed .tweet p:last').html('<a href="http://www.twitter.com/' + tweet.from_user +'">@' + tweet.from_user + '</a> ' + moment(tweet.created_at).fromNow());
-          $('.twitter_feed').fadeIn();
-
-          _.delay(updateTweets, 7000);
+          $('.twitter_feed').addClass('twitter_feed_display');
       });
+    } else {
+      $('.twitter_feed').removeClass('twitter_feed_display');
     }
+
+    _.delay(updateTweets, 7000);
   }
   updateTweets();
 });
