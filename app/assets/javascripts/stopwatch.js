@@ -63,6 +63,10 @@
       this._render(this._time);
     },
 
+    setTwitterHashtag: function(twitter_hashtag) {
+      this.twitterHashtag = this.options.twitterHashtag = twitter_hashtag;
+    },
+
     //
     // PRIVATE METHODS
     //

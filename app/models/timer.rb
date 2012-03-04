@@ -4,7 +4,7 @@ class Timer < ActiveRecord::Base
     url_key           :string, validates: [:uniqueness], null: true, index: true
     admin_key         :string, validates: [:presence],               index: true
     twitter_hashtag   :string
-    time              :time
+    time              :integer
   end
 
   attr_accessible :twitter_hashtag, :time, as: :admin

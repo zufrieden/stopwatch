@@ -12,6 +12,20 @@ class TimerController < ApplicationController
     raise ActiveRecord::RecordNotFound unless @timer
   end
 
+  def update
+    @timer = Timer.where('url_key = ?', params[:id]).first
+    raise ActiveRecord::RecordNotFound unless @timer
+
+    options = params[:timer]
+    options[:time] &&= options[:time][:hours].to_i.hours + options[:time][:minutes].to_i.minutes + options[:time][:seconds].to_i.seconds
+
+    if @timer.update_attributes(options, as: :admin)
+      render nothing: true, status: 200
+    else
+      render nothing: true, status: 500
+    end
+  end
+
   def event
     if publish_timer_action(params[:id], params[:timer])
       render nothing: true, status: 200

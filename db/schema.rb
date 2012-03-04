@@ -11,13 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120304090129) do
+ActiveRecord::Schema.define(:version => 20120304105424) do
 
   create_table "timers", :force => true do |t|
-    t.string "url_key"
-    t.string "admin_key"
-    t.string "twitter_hashtag"
-    t.time   "time"
+    t.string  "url_key"
+    t.string  "admin_key"
+    t.string  "twitter_hashtag"
+    t.integer "time"
   end
 
   add_index "timers", ["admin_key"], :name => "index_timers_on_admin_key"
