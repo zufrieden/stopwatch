@@ -90,6 +90,9 @@ $(function() {
     stopwatch.setTwitterHashtag(options.twitter_hashtag);
     stopwatch.reset(options.time);
 
+    // launch tweets update
+    updateTweets();
+
     // close modal
     $('#configure').modal('hide');
 
@@ -109,27 +112,30 @@ $(function() {
   // twitter integration
   var lastTweetID, tweets = [];
   var updateTweets = function() {
-    $.getJSON('http://search.twitter.com/search.json?q=' + stopwatch.options.twitterHashtag + '&since_id=' + lastTweetID + '&result_type=recent&rpp=100&include_entities=true&callback=?',
-      function(results) {
-        results = _.filter(results.results, function(result) {
-          return _.any(result.entities.hashtags, function(hashtag) {
-            return (hashtag.text == stopwatch.options.twitterHashtag);
+    if (stopwatch.options.twitterHashtag) {
+      $.getJSON('http://search.twitter.com/search.json?q=' + stopwatch.options.twitterHashtag + '&since_id=' + lastTweetID + '&result_type=recent&rpp=100&include_entities=true&callback=?',
+        function(results) {
+          results = _.filter(results.results, function(result) {
+            return _.any(result.entities.hashtags, function(hashtag) {
+              return (hashtag.text == stopwatch.options.twitterHashtag);
+            });
           });
-        });
 
-        if (results.length > 0) {
-          tweets = _.union(results, _.initial(tweets, results.length));
-          lastTweetID = _.last(tweets).id;
-        }
+          if (results.length > 0) {
+            tweets = _.union(results, _.initial(tweets, results.length));
+            lastTweetID = _.last(tweets).id;
+          }
 
-        var tweet = _.first(_.shuffle(_.first(tweets, 10)))
-        $('.twitter_feed .profile_pic img').attr({src: tweet.profile_image_url});
-        $('.twitter_feed .tweet p:first').html(tweet.text);
-        $('.twitter_feed .tweet p:last a').html('@' + tweet.from_user);
-        $('.twitter_feed .tweet p:last').html('<a href="http://www.twitter.com/' + tweet.from_user +'">@' + tweet.from_user + '</a> ' + moment(tweet.created_at).fromNow());
+          var tweet = _.first(_.shuffle(_.first(tweets, 10)))
+          $('.twitter_feed .profile_pic img').attr({src: tweet.profile_image_url});
+          $('.twitter_feed .tweet p:first').html(tweet.text);
+          $('.twitter_feed .tweet p:last a').html('@' + tweet.from_user);
+          $('.twitter_feed .tweet p:last').html('<a href="http://www.twitter.com/' + tweet.from_user +'">@' + tweet.from_user + '</a> ' + moment(tweet.created_at).fromNow());
+          $('.twitter_feed').fadeIn();
 
-        _.delay(updateTweets, 7000);
-    });
+          _.delay(updateTweets, 7000);
+      });
+    }
   }
   updateTweets();
 });

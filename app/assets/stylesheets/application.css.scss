@@ -100,6 +100,7 @@ $navbarLinkColorHover:            $red;
 /* TWITTER WALL */
 .twitter_feed{
   background-color: $grayLighter;
+  display: none;
 }
 .twitter_hash{
   padding: 1em;
@@ -109,7 +110,7 @@ $navbarLinkColorHover:            $red;
   padding-right: 1em;
   p{
     padding: 0.4em 0;
-    font-size: 2.4em;
+    font-size: 3em;
     line-height: 1.2em;
   }
 }
