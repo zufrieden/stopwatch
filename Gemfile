@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'rails',        '3.2.2'
 gem 'thin'
 gem 'private_pub'
+gem 'migrant'
 
 gem 'asset_sync'
 gem 'airbrake'
@@ -29,6 +30,11 @@ group :development, :test do
 
   gem 'rspec-rails'
   gem 'spork', '~> 0.9.0'
+
+  gem 'shoulda-matchers'
+  gem 'factory_girl_rails'
+  gem 'factory-girl-matchers', '>= 1.0.0.rc1'
+  gem 'faker'
 
   gem 'ruby-debug19', require: 'ruby-debug'
   gem 'pry-rails'

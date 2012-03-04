@@ -1,8 +1,33 @@
 class TimerController < ApplicationController
-  respond_to :json
+  respond_to :json, only: [:event]
+  respond_to :html, only: [:index, :show]
+
+  def index
+    @timer = Timer.create!
+    redirect_to timer_url(@timer.url_key)
+  end
+
+  def show
+    @timer = Timer.where('url_key = ?', params[:id]).first
+    raise ActiveRecord::RecordNotFound unless @timer
+  end
+
+  def update
+    @timer = Timer.where('url_key = ?', params[:id]).first
+    raise ActiveRecord::RecordNotFound unless @timer
+
+    options = params[:timer]
+    options[:time] &&= options[:time][:hours].to_i.hours + options[:time][:minutes].to_i.minutes + options[:time][:seconds].to_i.seconds
+
+    if @timer.update_attributes(options, as: :admin)
+      render nothing: true, status: 200
+    else
+      render nothing: true, status: 500
+    end
+  end
 
   def event
-    if publish_timer_action(params[:timer])
+    if publish_timer_action(params[:id], params[:timer])
       render nothing: true, status: 200
     else
       render nothing: true, status: :not_acceptable
@@ -11,11 +36,11 @@ class TimerController < ApplicationController
 
   private
 
-  def publish_timer_action(timer = {})
+  def publish_timer_action(url_key, timer = {})
     if !%(start stop reset).include?(timer[:event]) || (timer[:time] && !timer[:time].is_a?(Hash))
       result = false
     else
-      result = PrivatePub.publish_to('/timer/event',
+      result = PrivatePub.publish_to("/timer/#{url_key}/event",
         event: timer[:event],
         time: timer[:time]
       )

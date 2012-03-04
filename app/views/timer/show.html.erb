@@ -78,15 +78,15 @@
         <div class="control-group">
           <label class="control-label" for="time">Time</label>
           <div class="controls">
-            <input class="input-mini focused" id="hour" type="text" value="" placeholder="HH">
-            <input class="input-mini" id="minutes" type="text" value="" placeholder="MM">
-            <input class="input-mini" id="secondes" type="text" value="" placeholder="SS">
+            <input class="input-mini focused" name="timer_hours" type="text" value="" placeholder="HH">
+            <input class="input-mini" name="timer_minutes" type="text" value="" placeholder="MM">
+            <input class="input-mini" name="timer_seconds" type="text" value="" placeholder="SS">
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label" for="hashtag">#hashtag</label>
+          <label class="control-label" for="timer_twitter_hashtag">#hashtag</label>
           <div class="controls">
-            <input class="input-xlarge" id="hashtag" type="text" placeholder="#hashtag">
+            <input class="input-xlarge" id="timer_twitter_hashtag" name="timer_twitter_hashtag" type="text" placeholder="#hashtag">
           </div>
         </div>
         <div class="control-group">
@@ -106,7 +106,7 @@
       </fieldset>
     </div>
     <div class="form-actions" class="modal-footer">
-      <button type="submit" class="btn btn-primary">Save changes</button>
+      <button type="submit" class="btn btn-primary save">Save changes</button>
       <button class="btn" data-dismiss="modal">Cancel</button>
     </div>
   </form>
@@ -114,6 +114,15 @@
 
 </div>
 
-
-<%= subscribe_to "/timer/event" %>
+<%= subscribe_to "/timer/#{@timer.url_key}/event" %>
+<%= javascript_tag do %>
+  var timerData = '<%=raw({
+    time: {
+      hours: (@timer.time / 60 / 60).floor % 60,
+      minutes: (@timer.time / 60).floor % 60,
+      seconds: (@timer.time).floor % 60,
+    },
+    twitter_hashtag: @timer.twitter_hashtag
+  }.to_json) %>'
+<% end %>
 

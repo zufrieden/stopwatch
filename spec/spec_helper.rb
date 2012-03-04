@@ -65,7 +65,7 @@ Spork.each_run do
   I18n.backend.reload!
 
   # reload routes
-  EnterpriseDashboard::Application.reload_routes!
+  Stopwatch::Application.reload_routes!
 
   # reload support stuff
   Dir[Rails.root.join('spec/support/**/*.rb')].each {|f| require f}
