@@ -746,6 +746,13 @@ line-height: 1.2em;
 }
 
 
+.world_map{
+    width: 700px;
+    height: 375px;
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+}
+
 .contact_us{
     margin-top: 0.3em;
 }
