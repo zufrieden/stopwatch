@@ -92,8 +92,8 @@
         <div class="control-group">
           <label class="control-label">Public URL</label>
           <div class="controls">
-            <span class="help-inline"><a href="http://stopwat.ch/swalau" target="_blank">http://stopwat.ch/swalau</a></span>
-            <a class="btn" href="http://chart.apis.google.com/chart?cht=qr&chs=150x150&choe=UTF-8&chld=H&chl="><i class="icon-qrcode"></i> View QR Code</a>
+            <span class="help-inline"><a href="<%= timer_url(@timer.url_key) %>" target="_blank"><%= timer_url(@timer.url_key) %></a></span>
+            <a class="btn" href="http://chart.apis.google.com/chart?cht=qr&chs=150x150&choe=UTF-8&chld=H&chl=<%= timer_url(@timer.url_key) %>"><i class="icon-qrcode"></i> View QR Code</a>
           </div>
         </div>  
         <div class="control-group">
