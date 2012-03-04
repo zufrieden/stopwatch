@@ -11,6 +11,8 @@ class Timer < ActiveRecord::Base
 
   attr_accessible :twitter_hashtag, :time, as: :admin
 
+  after_initialize  :set_defaults
+
   before_validation :generate_admin_key
   after_create      :generate_url_key
 
@@ -32,6 +34,10 @@ class Timer < ActiveRecord::Base
     end
 
     update_attribute('url_key', result)
+  end
+
+  def set_defaults
+    self.time ||= 240
   end
 
 end
