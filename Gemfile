@@ -3,7 +3,8 @@ source 'https://rubygems.org'
 # Globals dependencies
 gem 'rails',        '3.2.2'
 gem 'thin'
-gem 'private_pub'
+gem 'faye'
+gem 'faye-redis'
 gem 'migrant'
 
 # Assets dependencies
@@ -18,6 +19,10 @@ group :assets do
 end
 
 # Production environment dependencies
+group :production do
+   gem 'newrelic_rpm'
+end
+
 group :production, :staging do
   gem 'pg'
   gem 'airbrake'

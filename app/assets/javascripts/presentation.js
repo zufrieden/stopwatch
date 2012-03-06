@@ -13,8 +13,6 @@
 //= require jquery.ui
 //= require moment
 //
-//= require private_pub
-//
 //= require stopwatch
 //
 $(function() {
@@ -22,24 +20,22 @@ $(function() {
 var stopwatch = new StopWatch({
   time: {
     hours: 0,
-    minutes: 4,
+    minutes: 7,
     seconds: 0
   }
 });
 
-PrivatePub.subscribe('/timer/m2/event', function(data, channel) {
-  switch(data.event) {
-    case 'start':
-      stopwatch.start(data.time);
-    break;
-    case 'stop':
-      stopwatch.stop();
-    break;
-    case 'reset':
-      stopwatch.reset(data.time);
-    break;
+var startTimer = function() {
+  if (window.location.hash.match(/\/timer/)) {
+    setTimeout(function() {
+      stopwatch._time -= 1;
+      stopwatch.start();
+    }, 350);
+  } else {
+    setTimeout(startTimer, 100);
   }
-});
+}
+startTimer();
 
 var colorAnimation = function() {
   $('#brandable').animate({backgroundColor: 'red'}, 1000, function() {

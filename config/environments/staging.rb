@@ -1,3 +1,6 @@
+require 'faye'
+require 'faye/redis'
+
 Stopwatch::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -55,6 +58,20 @@ Stopwatch::Application.configure do
 
   # Enable threaded mode
   # config.threadsafe!
+
+  # Add Faye has middleware
+  redis_config = ENV['REDISTOGO_URL'].match(/redis:\/\/.+?:(?<password>.+?)@(?<host>.+?):(?<port>\d+)/)
+  config.middleware.insert_before 'Rack::Cache', 'Faye::RackAdapter',
+    mount: '/faye',
+    timeout: 25,
+    ping: 20,
+    engine: {
+      type:     Faye::Redis,
+      host:     redis_config[:host],
+      port:     redis_config[:port],
+      password: redis_config[:password],
+      database: 1
+    }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)

@@ -1,3 +1,5 @@
+require 'faye'
+
 Stopwatch::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -15,6 +17,11 @@ Stopwatch::Application.configure do
 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
+
+  # Add Faye has middleware
+  config.middleware.insert_before 'Rack::Lock', 'Faye::RackAdapter',
+    mount: '/faye',
+    timeout: 35
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log

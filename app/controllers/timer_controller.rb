@@ -38,17 +38,15 @@ class TimerController < ApplicationController
 
   def publish_timer_action(url_key, timer = {})
     if !%(start stop reset).include?(timer[:event]) || (timer[:time] && !timer[:time].is_a?(Hash))
-      result = false
+      false
     else
-      result = PrivatePub.publish_to("/timer/#{url_key}/event",
+      faye_client.publish("/timer/#{url_key}/event",
         event: timer[:event],
         time: timer[:time]
       )
 
-      result = result.code_type == Net::HTTPOK
+      true
     end
-
-    result
   end
 
 end

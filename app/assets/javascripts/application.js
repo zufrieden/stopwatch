@@ -17,8 +17,6 @@
 //= require jquery.fittext
 //= require moment
 //
-//= require private_pub
-//
 //= require stopwatch
 //
 
@@ -48,17 +46,23 @@ $(function() {
     }
   });
 
-  PrivatePub.subscribe('/timer/' + timer_url_key + '/event', function(data, channel) {
+  var fayeClient = new Faye.Client('/faye', {
+    timeout: 30,
+    retry: 5
+  });
+  fayeClient.disable('websocket');
+
+  fayeClient.subscribe('/timer/' + timer_url_key + '/event', function(data) {
     switch(data.event) {
       case 'start':
         stopwatch.start(data.time);
-        break;
+      break;
       case 'stop':
         stopwatch.stop();
-        break;
+      break;
       case 'reset':
         stopwatch.reset(data.time);
-        break;
+      break;
     }
   });
 

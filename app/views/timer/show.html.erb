@@ -91,7 +91,6 @@
 
 </div>
 
-<%= subscribe_to "/timer/#{@timer.url_key}/event" %>
 <%= javascript_tag do %>
   var timerData = '<%=raw({
     time: {
