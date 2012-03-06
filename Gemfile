@@ -6,9 +6,6 @@ gem 'thin'
 gem 'private_pub'
 gem 'migrant'
 
-gem 'asset_sync'
-gem 'airbrake'
-
 # Assets dependencies
 group :assets do
   gem 'jquery-rails'
@@ -17,11 +14,13 @@ group :assets do
   gem 'compass',        '~> 0.12.rc'
   gem 'bourbon',        '~> 1.4'
   gem 'bootstrap-sass', '~> 2.0.1'
+  gem 'asset_sync'
 end
 
 # Production environment dependencies
 group :production, :staging do
   gem 'pg'
+  gem 'airbrake'
 end
 
 # Development environment dependencies (also needed by test environement)
