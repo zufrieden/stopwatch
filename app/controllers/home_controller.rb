@@ -9,4 +9,8 @@ class HomeController < ApplicationController
 	def startup
 		render "startup", layout: false
 	end
+
+	def about
+		render "about"
+	end	
 end

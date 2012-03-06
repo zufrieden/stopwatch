@@ -1,5 +1,5 @@
 Stopwatch::Application.routes.draw do
-  match '/demo' => 'home#demo'
+  match '/about' => 'home#about'
   match '/presentation' => 'home#presentation'
   match '/startup' => 'home#startup'
 

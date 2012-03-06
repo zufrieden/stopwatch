@@ -1,26 +1,4 @@
-
-
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container" style="width: auto;">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-      <a class="logo"><strong>stopwat.ch</strong></a>
-      <div class="nav-collapse">
-        <ul class="nav pull-right">
-          <li><a class="timer-event start"> start <i class="icon-play"></i></a></li>
-          <li><a class="timer-event stop"> stop <i class="icon-stop"></i></a></li>
-          <li><a class="timer-event reset"> reset <i class=" icon-repeat"></i></a></li>
-          <li class="divider-vertical"></li>
-          <li><a href="#configure" data-toggle="modal"> Admin <i class="icon-cog"></i></a></li>
-        </ul>
-      </div><!-- /.nav-collapse -->
-    </div>
-  </div><!-- /navbar-inner -->
-</div>
+<%= render partial: 'layouts/menu' %>
 
 
 <div class="stopwatch">
@@ -97,9 +75,9 @@
           </div>
         </div>  
         <div class="control-group">
-          <label class="control-label">Administration URL</label>
+          <label class="control-label">Administration URL </label>
           <div class="controls">
-            <a href="#" class="btn btn-primary">GO PRO</a>
+            <a href="/about" id="gopro" class="btn" rel="popover" data-content="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod." data-original-title="Pro account coming soon">GO PRO</a> <span class="label label-info">Coming soon</span> 
           </div>
         </div>  
       </fieldset>

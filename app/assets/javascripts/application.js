@@ -25,8 +25,10 @@
 $(function() {
   $(".stopwatch").fitText(0.5, { minFontSize: '20px'});
 
+  $('#gopro').popover();
+
   var stopwatch = new StopWatch(JSON.parse(timerData));
-  var timer_url_key = window.location.pathname.match(/^\/(timer\/)?([^\/]+)/)[2]
+  var timer_url_key = window.location.pathname.match(/^\/(timer\/)?([^\/]+)/)[2];
 
   var lastTweetID, tweets = [];
 

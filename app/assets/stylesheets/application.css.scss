@@ -33,14 +33,19 @@ $navbarLinkColorHover:            $red;
 .logo{
   display: block;
   float: left;
-  background: image-url('logo_stopwatch.png') no-repeat 0 50%;
   width: 150px;
   height: 30px;
   margin-left: 10px;
-  margin-top: 6px;
+  margin-top: 10px;
 }
 .logo strong{
-  display: none;
+  text-transform: lowercase;
+  color: $black;
+  font-size: 30px;
+  font-weight: normal;
+  span{
+    color: $red;
+  }
 }
 .navbar-inner{
   text-transform: uppercase;
@@ -48,6 +53,7 @@ $navbarLinkColorHover:            $red;
   background-image: none;
   @include box-shadow(0 0px 0px rgba(0,0,0,0));
   li a{
+    padding: 1em 0.6em !important;
     cursor: pointer;
   }
 }
