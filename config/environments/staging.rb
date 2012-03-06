@@ -59,6 +59,11 @@ Stopwatch::Application.configure do
   # Enable threaded mode
   # config.threadsafe!
 
+  # Secure staging enviroment
+  config.middleware.insert_before 'Rack::Cache', 'Rack::Auth::Digest::MD5', 'stopwat.ch staging', SecureRandom.base64 do |user|
+    user == ENV['STAGING_HTTP_AUTH_USER'] && ENV['STAGING_HTTP_AUTH_PSWD']
+  end
+
   # Add Faye has middleware
   redis_config = ENV['REDISTOGO_URL'].match(/redis:\/\/.+?:(?<password>.+?)@(?<host>.+?):(?<port>\d+)/)
   config.middleware.insert_before 'Rack::Cache', 'Faye::RackAdapter',
