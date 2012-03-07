@@ -2,7 +2,7 @@ class TimerController < ApplicationController
   respond_to :json, only: [:event]
   respond_to :html, only: [:index, :show]
 
-  before_filter :check_robots
+  before_filter :check_robots, only: [:index, :show]
 
   def index
     @timer = Timer.create!
