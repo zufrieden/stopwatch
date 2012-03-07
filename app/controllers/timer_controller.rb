@@ -24,12 +24,12 @@ class TimerController < ApplicationController
     if @timer.update_attributes(options, as: :admin)
       render nothing: true, status: 200
     else
-      render nothing: true, status: 500
+      render nothing: true, status: :not_acceptable
     end
   end
 
   def event
-    if publish_timer_action(params[:id], params[:timer])
+    if publish_timer_event(params[:id], params[:timer])
       render nothing: true, status: 200
     else
       render nothing: true, status: :not_acceptable
@@ -45,7 +45,7 @@ class TimerController < ApplicationController
   # Send event to all registred timer
   #
   # @return [Boolean] return false if params is invalid
-  def publish_timer_action(url_key, timer = {})
+  def publish_timer_event(url_key, timer = {})
     if !%(start stop reset).include?(timer[:event]) || (timer[:time] && !timer[:time].is_a?(Hash))
       false
     else
