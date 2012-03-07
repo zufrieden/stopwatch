@@ -40,7 +40,8 @@ $(function() {
         contentType: 'application/json',
         dataType: 'json',
         data: JSON.stringify({timer: {
-          event: event
+          event: event,
+          time: stopwatch.options.time
         }})
       });
     }
