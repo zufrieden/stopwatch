@@ -61,6 +61,29 @@ $navbarLinkColorHover:            $red;
 /* ABOUT */
 .about{
   margin-top: 5em;
+  .hero-unit{
+    h1{
+      font-size: 3em;
+    }
+  }
+  .dot_link{
+    width:130px;
+    font-size: 20px;
+    line-height: 22px;
+    height: 100px;
+    display: block;
+    margin: 0 auto 20px;
+    color: #fff;
+    text-align: center;
+    padding: 50px 10px 0;
+    background-color: $red;
+    @include border-radius(75px);
+
+    &:hover{
+      background-color: lighten($red, 10%);
+      text-decoration: none;
+    }
+  }
 }
 
 
