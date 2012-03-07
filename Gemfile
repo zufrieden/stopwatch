@@ -26,6 +26,7 @@ end
 group :production, :staging do
   gem 'pg'
   gem 'airbrake'
+  gem 'dalli'
 end
 
 # Development environment dependencies (also needed by test environement)
