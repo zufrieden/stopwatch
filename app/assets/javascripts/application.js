@@ -41,7 +41,7 @@ $(function() {
         dataType: 'json',
         data: JSON.stringify({timer: {
           event: event,
-          time: stopwatch.options.time
+          time: (event === 'reset' ? stopwatch.options.time : null)
         }})
       });
     }

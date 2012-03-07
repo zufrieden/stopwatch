@@ -21,6 +21,7 @@ class TimerController < ApplicationController
     options[:time] &&= options[:time][:hours].to_i.hours + options[:time][:minutes].to_i.minutes + options[:time][:seconds].to_i.seconds
 
     if @timer.update_attributes(options, as: :admin)
+      publish_timer_event(params[:id], params[:timer])
       render nothing: true, status: 200
     else
       render nothing: true, status: :not_acceptable
