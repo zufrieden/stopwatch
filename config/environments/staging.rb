@@ -51,7 +51,7 @@ StopWatch::Application.configure do
   end
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( presentation.js presentation.css startup.js startup.css )
+  config.assets.precompile += %w( impress.js presentation.js presentation.css startup.js startup.css )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
