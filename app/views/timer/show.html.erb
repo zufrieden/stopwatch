@@ -1,8 +1,15 @@
+<% content_for :menu_right do -%>
+  <li><a class="timer-event start"> start <i class="icon-play"></i></a></li>
+  <li><a class="timer-event stop"> stop <i class="icon-stop"></i></a></li>
+  <li><a class="timer-event reset"> reset <i class=" icon-repeat"></i></a></li>
+  <li class="divider-vertical"></li>
+  <li><a href="#configure" data-toggle="modal"> Admin <i class="icon-cog"></i></a></li>
+<% end %>
+
 <%= render partial: 'layouts/menu' %>
 
-
 <div class="stopwatch">
-<time class="dash days_dash">
+  <time class="dash days_dash">
   <span class="digit">0</span>
   <span class="digit">0</span>
   <span class="dash_title">j</span>
