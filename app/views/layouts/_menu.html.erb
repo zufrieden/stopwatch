@@ -6,17 +6,14 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="logo" href="/"><strong>stopwat<span>.</span>ch</strong></a>
+      <a class="logo" href="<%= current_timer_or_root_path %>"><strong>stopwat<span>.</span>ch</strong></a>
       <div class="nav-collapse">
         <ul class="nav">
           <li><a href="/about">about</a></li>
+          <%= yield :menu_left %>
         </ul>
         <ul class="nav pull-right">
-          <li><a class="timer-event start"> start <i class="icon-play"></i></a></li>
-          <li><a class="timer-event stop"> stop <i class="icon-stop"></i></a></li>
-          <li><a class="timer-event reset"> reset <i class=" icon-repeat"></i></a></li>
-          <li class="divider-vertical"></li>
-          <li><a href="#configure" data-toggle="modal"> Admin <i class="icon-cog"></i></a></li>
+          <%= yield :menu_right %>
         </ul>
       </div><!-- /.nav-collapse -->
     </div>

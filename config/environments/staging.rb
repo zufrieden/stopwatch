@@ -1,7 +1,7 @@
 require 'faye'
 require 'faye/redis'
 
-Stopwatch::Application.configure do
+StopWatch::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
@@ -43,7 +43,7 @@ Stopwatch::Application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
   # Use a different cache store in production
-  # config.cache_store = :mem_cache_store
+  config.cache_store = :dalli_store, { namespace: 'stopwatch_cache' }
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   config.action_controller.asset_host = Proc.new do |source|
@@ -51,7 +51,7 @@ Stopwatch::Application.configure do
   end
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( presentation.js presentation.css startup.js startup.css )
+  config.assets.precompile += %w( impress.js presentation.js presentation.css startup.js startup.css )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false

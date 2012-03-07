@@ -6,6 +6,7 @@ gem 'thin'
 gem 'faye'
 gem 'faye-redis'
 gem 'migrant'
+gem 'nokogiri'
 
 # Assets dependencies
 group :assets do
@@ -26,6 +27,7 @@ end
 group :production, :staging do
   gem 'pg'
   gem 'airbrake'
+  gem 'dalli'
 end
 
 # Development environment dependencies (also needed by test environement)
