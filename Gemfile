@@ -6,6 +6,7 @@ gem 'thin'
 gem 'faye'
 gem 'faye-redis'
 gem 'migrant'
+gem 'nokogiri'
 
 # Assets dependencies
 group :assets do

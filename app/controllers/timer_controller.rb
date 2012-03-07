@@ -2,6 +2,8 @@ class TimerController < ApplicationController
   respond_to :json, only: [:event]
   respond_to :html, only: [:index, :show]
 
+  before_filter :check_robots
+
   def index
     @timer = Timer.create!
     redirect_to timer_url(@timer.url_key)
@@ -36,6 +38,13 @@ class TimerController < ApplicationController
 
   private
 
+  #
+  # Methods
+  #
+
+  # Send event to all registred timer
+  #
+  # @return [Boolean] return false if params is invalid
   def publish_timer_action(url_key, timer = {})
     if !%(start stop reset).include?(timer[:event]) || (timer[:time] && !timer[:time].is_a?(Hash))
       false
@@ -45,6 +54,27 @@ class TimerController < ApplicationController
         time: timer[:time]
       )
 
+      true
+    end
+  end
+
+  #
+  # Filters
+  #
+
+  # Render about page when visited by a bot
+  #
+  # @return [Boolean] return false when a robot is detected
+  def check_robots
+    if robots.include?(request.user_agent)
+      if request.path == root_path
+        render 'home/about'
+      else
+        redirect_to root_url, status: :moved_permanently
+      end
+
+      false
+    else
       true
     end
   end
