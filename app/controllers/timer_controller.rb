@@ -11,6 +11,7 @@ class TimerController < ApplicationController
 
   def show
     @timer = Timer.where('url_key = ?', params[:id]).first || raise(ActiveRecord::RecordNotFound)
+    session[:timer_url_key] = @timer.url_key
   end
 
   def update

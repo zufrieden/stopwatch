@@ -23,4 +23,13 @@ class ApplicationController < ActionController::Base
       data.xpath('//user-agent/type[contains(text(),"R")]/../string/text() |  /user-agent/type[contains(text(),"C")]/../string/text()').map(&:to_s)
     end
   end
+
+  # Return current active timer
+  #
+  # @return [Timer] active timer from session
+  def current_timer
+    @current_timer ||= session[:timer_url_key] && Timer.where('url_key = ?', session[:timer_url_key]).first
+  end
+  helper_method :current_timer
+
 end
