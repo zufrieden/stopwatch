@@ -23,7 +23,7 @@ if Rails.env.development?
     end
 
     task :production do
-      deploy(:dev, :production)
+      deploy(:master, :production)
     end
 
     task :testing do
