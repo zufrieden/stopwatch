@@ -10,13 +10,11 @@ class TimerController < ApplicationController
   end
 
   def show
-    @timer = Timer.where('url_key = ?', params[:id]).first
-    raise ActiveRecord::RecordNotFound unless @timer
+    @timer = Timer.where('url_key = ?', params[:id]).first || raise(ActiveRecord::RecordNotFound)
   end
 
   def update
-    @timer = Timer.where('url_key = ?', params[:id]).first
-    raise ActiveRecord::RecordNotFound unless @timer
+    @timer = Timer.where('url_key = ?', params[:id]).first || raise(ActiveRecord::RecordNotFound)
 
     options = params[:timer]
     options[:time] &&= options[:time][:hours].to_i.hours + options[:time][:minutes].to_i.minutes + options[:time][:seconds].to_i.seconds
