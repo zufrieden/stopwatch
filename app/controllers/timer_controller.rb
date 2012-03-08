@@ -5,7 +5,14 @@ class TimerController < ApplicationController
   before_filter :check_robots, only: [:index, :show]
 
   def index
+    # create a new timer
     @timer = Timer.create!
+
+    # register current session has admin for new timer
+    session[:timer_admin_url_keys] ||= []
+    session[:timer_admin_url_keys] << @timer.url_key
+
+    # redirect to new timer page
     redirect_to timer_url(@timer.url_key)
   end
 
@@ -29,8 +36,13 @@ class TimerController < ApplicationController
   end
 
   def event
-    if publish_timer_event(params[:id], params[:timer])
+    # return unauthorized status if current session user is not an admin
+    if !admin?
+      render nothing: true, status: :unauthorized
+    # return success status if event can be sent to clients
+    elsif publish_timer_event(params[:id], params[:timer])
       render nothing: true, status: 200
+    # or return not acceptable if not
     else
       render nothing: true, status: :not_acceptable
     end

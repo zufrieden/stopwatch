@@ -32,4 +32,12 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_timer
 
+  # Return admin status for current timer
+  #
+  # @return [Boolean] admin status
+  def admin?
+    @admin ||= !!(session[:timer_admin_url_keys] && session[:timer_admin_url_keys].include?(current_timer.url_key))
+  end
+  helper_method :admin?
+
 end
