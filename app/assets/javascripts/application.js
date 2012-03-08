@@ -33,6 +33,20 @@ $(function() {
   $('.timer-event').on('click', function() {
     var event = ($(this).attr('class').match(/start|stop|reset/) || [])[0];
 
+    if (typeof _gaq !== 'undefined') {
+      switch(event) {
+        case 'start':
+          _gaq.push(['_trackEvent', 'Timer', 'Start', null, stopwatch.timeInSeconds()]);
+        break;
+        case 'stop':
+          _gaq.push(['_trackEvent', 'Timer', 'Stop']);
+        break;
+        case 'reset':
+          _gaq.push(['_trackEvent', 'Timer', 'Reset', null, stopwatch.timeInSeconds()]);
+        break;
+      }
+    }
+
     if (event) {
       $.ajax({
         url: '/timer/' + timer_url_key + '/event',
@@ -57,12 +71,21 @@ $(function() {
     switch(data.event) {
       case 'start':
         stopwatch.start(data.time);
+        if (typeof _gaq !== 'undefined') {
+          _gaq.push(['_trackEvent', 'Timer', 'Started', null, stopwatch.timeInSeconds(), true]);
+        }
       break;
       case 'stop':
         stopwatch.stop();
+        if (typeof _gaq !== 'undefined') {
+          _gaq.push(['_trackEvent', 'Timer', 'Stopped', null, null, true]);
+        }
       break;
       case 'reset':
         stopwatch.reset(data.time);
+        if (typeof _gaq !== 'undefined') {
+          _gaq.push(['_trackEvent', 'Timer', 'Reseted', null, stopwatch.timeInSeconds(), true]);
+        }
       break;
     }
   });

@@ -50,17 +50,21 @@
       }
 
       // reset time
-      this._time = 0;
-      if (this.options.time) {
-        this._time += (this.options.time.days || 0) * 24 * 60 * 60;
-        this._time += (this.options.time.hours || 0) * 60 * 60;
-        this._time += (this.options.time.minutes || 0) * 60;
-        this._time += (this.options.time.seconds || 0);
-      }
-      this._timerLength = this._time;
+      this._timerLength = this._time = this.timeInSeconds();
 
       // reset timer view
       this._render(this._time);
+    },
+
+    timeInSeconds: function() {
+      var time = 0;
+      if (this.options.time) {
+        time += (this.options.time.days || 0) * 24 * 60 * 60;
+        time += (this.options.time.hours || 0) * 60 * 60;
+        time += (this.options.time.minutes || 0) * 60;
+        time += (this.options.time.seconds || 0);
+      }
+      return time;
     },
 
     setTwitterHashtag: function(twitter_hashtag) {
