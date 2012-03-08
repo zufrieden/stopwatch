@@ -11,73 +11,167 @@
  *= require_self
 */
 
+$red:                             #9d261d;
+$linkColor:                       $red;
+
+$baseFontFamily :                 'Helvetica';
+$navbarBackground:                #fff;
+$navbarBackgroundHighlight:       #fff;
+$navbarLinkBackgroundHover:       transparent;
+
+$navbarText:                      #000;
+$navbarLinkColor:                 #000;
+$navbarLinkColorHover:            $red;
+
+
 @import "bourbon";
 @import "bootstrap";
 @import "bootstrap-responsive";
+@import "theme";
 
-.home{
-    padding: 20px;
+/* BRAND */
+.logo{
+  display: block;
+  float: left;
+  width: 150px;
+  height: 30px;
+  margin-left: 10px;
+  margin-top: 10px;
 }
-.counter-block{
-    background-color: #000;
-    padding: 20px 20px 10px;
+.logo strong{
+  text-transform: lowercase;
+  color: $black;
+  font-size: 30px;
+  font-weight: normal;
+  span{
+    color: $red;
+  }
 }
-#countdown_dashboard{
-   p{
-     float: left;
-     font-size: 18px;
-     margin-left: 20px;
-     margin-top: 35px;
-   }
-   #container {
-     width: 700px;
-     color: #eee;
-     background: #000;
-     
-     margin-left: 190px;     
-   }
-   #countdown_dashboard {
-     height: 50px;
-     padding: 10px;
-     margin-top: 13px;
-   }
-   .dash {
-     width: 100px;
-     height: 70px;
-     background: transparent image-url('dash.png') 0 0 no-repeat;
-     float: left;
-     position: relative;
-     color: #333;
-   }
-   .weeks_dash {
-     background: transparent image-url('dark_weeks_dash.png') 0 0 no-repeat;
-   }
-   .days_dash {
-     background: transparent image-url('dark_days_dash.png') 0 0 no-repeat;
-   }
-   .hours_dash {
-     background: transparent image-url('dark_hours_dash.png') 0 0 no-repeat;
-   }
-   .minutes_dash {
-     background: transparent image-url('dark_minutes_dash.png') 0 0 no-repeat;
-   }
-   .seconds_dash {
-     background: transparent image-url('dark_seconds_dash.png') 0 0 no-repeat;
-   }
-   .miseconds_dash {
-     background: transparent image-url('dark_miseconds_dash.png') 0 0 no-repeat;
-   }
-   .dash .digit {
-     font: bold 24pt Verdana;
-     font-weight: bold;
-     float: left;
-     width: 27px;
-     margin-left: 10px;
-     margin-top: 8px;
-     text-align: center;
-     position: relative;
-   }
-   .dash_title {
-     display: none;
-   }    
+.navbar-inner{
+  text-transform: uppercase;
+  background-color: $white;
+  background-image: none;
+  @include box-shadow(0 0px 0px rgba(0,0,0,0));
+  li a{
+    padding: 1em 0.6em !important;
+    cursor: pointer;
+  }
+}
+
+/* ABOUT */
+.about{
+  margin-top: 5em;
+  .hero-unit{
+    h1{
+      font-size: 3em;
+    }
+  }
+  .dot_link{
+    width:130px;
+    font-size: 20px;
+    line-height: 22px;
+    height: 100px;
+    display: block;
+    margin: 0 auto 20px;
+    color: #fff;
+    text-align: center;
+    padding: 50px 10px 0;
+    background-color: $red;
+    @include border-radius(75px);
+
+    &:hover{
+      background-color: lighten($red, 10%);
+      text-decoration: none;
+    }
+  }
+}
+
+
+/* HASHTAG */
+.tools{
+  margin-top: 1em;
+}
+
+/* CLOCK */
+.stopwatch{
+  padding: 20% 0 18%;
+  line-height: auto;
+  text-align: center;
+  width: 100%;
+  display: block;
+  vertical-align: middle;
+  letter-spacing: -0.14em;
+}
+.digit{
+  color: $black;  
+  margin: 0em;
+  padding: 0em;
+}
+.dash{
+
+}
+.dash_title{
+  color: $black;
+}
+.days_dash{
+  display: none;
+  letter-spacing: -0.3em;
+}
+
+/* VISUAL TIMER */
+.inner-line{
+  background-color: $red;
+  height: 100%;
+  width: 0%;
+}
+.line{
+  width: 100%;
+  height:4%;
+  position: fixed;
+  bottom:0;
+  left:0;
+}
+
+/* TWITTER WALL */
+.twitter_feed{
+  background-color: $grayLighter;
+  display: none;
+}
+.twitter_hash{
+  padding: 1em;
+}
+.tweet{
+  min-height:190px;
+  padding-right: 1em;
+  margin-left: 240px;
+  p{
+    padding: 0.4em 0;
+    font-size: 3em;
+    line-height: 1.2em;
+  }
+}
+.profile_pic{
+  float: left;
+  margin-right: 2em;
+  padding: 20px;
+}
+.twitter_feed_display{
+  display: block;
+}
+@media (max-width: 979px) {
+  .twitter_feed, .twitter_feed_display{
+    display: none;
+  }
+}
+
+/* ACTIONS */
+.actions{
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+
+ text-align: center;
+  .btn-group{
+    display: inline-block;
+  }
 }

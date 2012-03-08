@@ -1,0 +1,21 @@
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container" style="width: auto;">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="logo" href="<%= current_timer_or_root_path %>"><strong>stopwat<span>.</span>ch</strong></a>
+      <div class="nav-collapse">
+        <ul class="nav">
+          <li><a href="/about">about</a></li>
+          <%= yield :menu_left %>
+        </ul>
+        <ul class="nav pull-right">
+          <%= yield :menu_right %>
+        </ul>
+      </div><!-- /.nav-collapse -->
+    </div>
+  </div><!-- /navbar-inner -->
+</div>

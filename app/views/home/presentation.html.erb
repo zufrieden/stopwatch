@@ -1,0 +1,356 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    
+    <title>Stopwat.ch - your perfect conference timer</title>
+    <%= stylesheet_link_tag    "presentation", :media => "all" %>
+    <%= javascript_include_tag "presentation" %>
+    
+    <%= csrf_meta_tags %>
+    
+    <%= favicon_link_tag('favicon.ico') %>
+    
+    
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+<body>
+
+
+<div id="impress" class="impress-not-supported">
+
+    <div class="fallback-message">
+        <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+        <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser. Upcoming version 10 of Internet Explorer <i>should</i> also handle it.</p>
+    </div>
+
+
+    <div id="swiss-quality" class="step slide dotslide" data-x="-1100" data-y="-4890" data-z="-30000">
+        <small>first things first...</small>
+        <h1>SWISS = ON TIME</h1>
+    </div>
+
+
+    <div id="timer-swiss-quality" class="step slide" data-x="-1100" data-y="-5890" data-z="-30000">
+        <div class="stopwatch">
+            <time class="dash hours_dash">
+                <span class="digit">0</span>
+                <span class="digit">0</span>
+                <span class="dash_title">.</span>
+            </time>
+            <time class="dash minutes_dash">
+                <span class="digit">0</span>
+                <span class="digit">0</span>
+                <span class="dash_title">.</span>
+            </time>
+            <time class="dash seconds_dash">
+                <span class="digit">0</span>
+                <span class="digit">0</span>
+            </time>
+        </div>
+    </div>
+
+    <div id="friday" class="step slide title_slide" data-x="0" data-y="-3460" data-z="-20000">
+        <h1>This Friday at Startup Weekend.</h1>
+        <h2>The timer was not exactly <strong>Swiss</strong>!</h2>
+    </div>
+
+
+
+
+
+
+
+    <div id="logo" class="step slide" data-x="0" data-y="0">
+        <h1>stopwat<span><strong>.</strong></span>ch</h1>
+        <h2>the perfect timer</h2>
+    </div>
+
+    <div id="europe" class="step slide" data-x="0" data-y="500" data-z="0">
+        <h1>We've already conquered <strong>Europe</strong> <span>Startup Weekend</span></h1>
+        <div style="background-image:url('assets/pres_sw_logo_.png');" class="logo_sw">#SWLAU</div>
+        <div style="background-image:url('assets/pres_sw_logo_d.png');" class="logo_sw">#SWDUB</div>
+        <div style="background-image:url('assets/pres_sw_logo_t.png');" class="logo_sw">#SWTO</div>
+
+    </div>
+
+    <div id="how_better" class="step slide title_slide" data-x="0" data-y="1500" data-z="0">
+        <h1><strong>Remote</strong> administration</h1>
+    </div>
+
+<!--     <div id="over_devices_sync" class="step slide title_slide" data-x="1000" data-y="2500" data-z="0"  data-rotate="90">
+        <h1>Synchronized on every device</h1>
+        <h2>Show it on the big screen</h2>
+        <h2>Start it on your iPhone</h2>
+        <h2>Display it on a tablet</h2>
+        <h2>...</h2>
+    </div> -->
+
+    <div id="timer_projector" class="step slide title_slide" data-x="1000" data-y="3500" data-z="0"  data-rotate="90">
+        <h2>Show it on the big screen</h2>
+        <div style="background-image:url('assets/pres_screen.png');" class="projector_timer">
+            <div class="stopwatch">
+                <time class="dash hours_dash">
+                    <span class="digit">0</span>
+                    <span class="digit">0</span>
+                    <span class="dash_title">.</span>
+                </time>
+                <time class="dash minutes_dash">
+                    <span class="digit">0</span>
+                    <span class="digit">0</span>
+                    <span class="dash_title">.</span>
+                </time>
+                <time class="dash seconds_dash">
+                    <span class="digit">0</span>
+                    <span class="digit">0</span>
+                </time>
+            </div>
+        </div>
+    </div>
+
+    <div id="timer_iphone" class="step slide title_slide" data-x="1000" data-y="4100" data-z="0"  data-rotate="90">
+        <h2>Start and stop it on your mobile</h2>
+        <div style="background-image:url('assets/pres_iphone_hand.png');" class="iphone_timer">
+            <div class="stopwatch">
+                <time class="dash hours_dash">
+                    <span class="digit">0</span>
+                    <span class="digit">0</span>
+                    <span class="dash_title">.</span>
+                </time>
+                <time class="dash minutes_dash">
+                    <span class="digit">0</span>
+                    <span class="digit">0</span>
+                    <span class="dash_title">.</span>
+                </time>
+                <time class="dash seconds_dash">
+                    <span class="digit">0</span>
+                    <span class="digit">0</span>
+                </time>
+            </div>
+        </div>
+    </div>
+
+    <div id="brandable"  class="step slide dotslide"  data-x="0" data-y="2500" data-z="0">
+        <div style="background-image:url('assets/pres_sw_logo.png');" class="logo_sw"></div>
+        <h1>brandable</h1>
+        <h2>your logo, your colors <br/>and your music</h2>
+    </div>
+
+
+<!--     <div id="remote_management"  class="step slide title_slide"  data-x="-1500" data-y="2500" data-z="0">
+        <h1>Remote management</h1>
+        <h2>start, stop and reset from your mobile</h2>
+    </div> -->
+
+    <div id="tweeterwall"  class="step slide title_slide"  data-x="-1500" data-y="2500" data-z="0" style="background-image:url('assets/twitter.png');">
+        <h1>Twitter integration</h1>
+        <h2>Display your twitter wall using your #hashtag</h2>
+    </div>
+
+
+    <div id="everywhere" class="step slide title_slide" data-x="-1500" data-y="1500" data-z="0">
+        <h1>Web technology</h1>
+        <h2>Works on <strong>every device</strong>!</h2>
+    </div>
+
+
+<!--     <div id="54hours" class="step slide title_slide" data-x="-1500" data-y="500" data-z="0">
+        <h1><strong>54 hours</strong><br/>we have a working product</h1>
+        <h2>Imagine how we can develop in a week</h2>
+    </div>
+
+    <div id="slide35hours" class="step slide dotslide" data-x="-1500" data-y="500" data-z="-10000">
+        <h1>SWISS WEEKS <br/>≠ <br/>35 HOURS</h1>
+    </div> -->
+
+
+    <div id="offer" class="step slide table_slide" data-x="-1500" data-y="-1500" data-z="0">
+        <h1>Offer</h1>
+        <table width="100%" cellpadding="15" cellspacing="10">
+            <tr height="120">
+                <td>
+                    
+                </td>
+                <td>
+                    <h3 class="offer_free">Free</h3>
+                </td>
+                <td>
+                    <h3 class="offer_10">$10</h3>
+                </td>
+                <td>
+                    <h3 class="offer_30">$30</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Admin device</strong>
+                </td>
+                <td>
+                    1
+                </td>
+                <td>
+                    unlimited
+                </td>
+                <td>
+                    unlimited
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Viewer</strong>
+                </td>
+                <td>
+                    unlimited
+                </td>
+                <td>
+                    unlimited
+                </td>
+                <td>
+                    unlimited
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Usage time</strong>
+                </td>
+                <td>
+                    
+                </td>
+                <td>
+                    1 day
+                </td>
+                <td>
+                    1 week
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Brandable</strong>
+                </td>
+                <td>
+                    
+                </td>
+                <td>
+                    yes
+                </td>
+                <td>
+                    yes
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Subdomain</strong>
+                </td>
+                <td>
+                    
+                </td>
+                <td>
+                    
+                </td>
+                <td>
+                    yes
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+
+
+    <div id="boring" class="step slide table_slide" data-x="-2500" data-y="-1500" data-z="0">
+        <h1>Boring numbers</h1>
+        <table width="100%" cellpadding="15" cellspacing="10">
+            <tr height="120">
+                <td>
+                    
+                </td>
+                <td>
+                    <h3 class="offer_free">2012</h3>
+                </td>
+                <td>
+                    <h3 class="offer_10">2013</h3>
+                </td>
+                <td>
+                    <h3 class="offer_30">2014</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Users</strong>
+                </td>
+                <td>
+                    80,000
+                </td>
+                <td>
+                    100,000
+                </td>
+                <td>
+                    160,000
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Revenue</strong>
+                </td>
+                <td>
+                    $200,000
+                </td>
+                <td>
+                    $250,000
+                </td>
+                <td>
+                    $400,000
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+    <div id="timer_contact_us" class="step slide content_slide" data-x="0" data-y="1000" data-z="0">
+        <h1>Do we really need to spend <br/>more time convincing you?</h1>
+
+            <div class="stopwatch">
+                <time class="dash hours_dash">
+                    <span class="digit">0</span>
+                    <span class="digit">0</span>
+                    <span class="dash_title">.</span>
+                </time>
+                <time class="dash minutes_dash">
+                    <span class="digit">0</span>
+                    <span class="digit">0</span>
+                    <span class="dash_title">.</span>
+                </time>
+                <time class="dash seconds_dash">
+                    <span class="digit">0</span>
+                    <span class="digit">0</span>
+                </time>
+            </div>
+
+        <p class="contact_us">Tweet us <a href="http://www.twitter.com/swissstopwatch">@swissstopwatch</a>!</p>
+    </div>
+
+    <div id="map" class="step slide map_slide" data-x="-2000" data-y="1000" data-z="-20000">
+        <div class="world_map" style="background-image:url('assets/map.png');"></div>
+    </div>
+
+
+</div>
+
+<div class="hint">
+    <p>Use a spacebar or arrow keys to navigate</p>
+</div>
+<script>
+if ("ontouchstart" in document.documentElement) { 
+    document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+}
+</script>
+
+
+<%= javascript_include_tag "impress" %>
+<script>impress();</script>
+
+</body>
+</html>

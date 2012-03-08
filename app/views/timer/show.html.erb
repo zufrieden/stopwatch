@@ -1,0 +1,103 @@
+<% content_for :menu_right do -%>
+  <% if admin? -%>
+    <li><a class="timer-event start"> start <i class="icon-play"></i></a></li>
+    <li><a class="timer-event stop"> stop <i class="icon-stop"></i></a></li>
+    <li><a class="timer-event reset"> reset <i class=" icon-repeat"></i></a></li>
+    <li class="divider-vertical"></li>
+    <li><a href="#configure" data-toggle="modal"> Admin <i class="icon-cog"></i></a></li>
+  <% end -%>
+<% end %>
+
+<%= render partial: 'layouts/menu' %>
+
+<div class="stopwatch">
+  <time class="dash days_dash">
+  <span class="digit">0</span>
+  <span class="digit">0</span>
+  <span class="dash_title">j</span>
+  </time>
+  <time class="dash hours_dash">
+  <span class="digit">0</span>
+  <span class="digit">0</span>
+  <span class="dash_title">.</span>
+  </time>
+  <time class="dash minutes_dash">
+  <span class="digit">0</span>
+  <span class="digit">0</span>
+  <span class="dash_title">.</span>
+  </time>
+  <time class="dash seconds_dash">
+  <span class="digit">0</span>
+  <span class="digit">0</span>
+  </time>
+  <div class="line"><div class="inner-line"></div></div>
+</div>
+
+<div class="twitter_feed">
+  <div class="profile_pic">
+    <img src="http://placekitten.com/190/190" width="190" height="190" />
+  </div>
+  <div class="tweet">
+    <p>@xavieralexandre ratio size of the cross to the height is 5:8, a ratio of 2:3 to the span of the flag is usual. #swissflag #swlau #precision</p>
+    <p><a href="#">@startupweekendCH</a> 1 minute ago</p>
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
+<div class="modal" id="configure" style="display:none;">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h3>Configure your timer</h3>
+  </div>
+
+  <form class="form-horizontal">
+    <div class="modal-body">
+      <fieldset>
+        <div class="control-group">
+          <label class="control-label" for="time">Time</label>
+          <div class="controls">
+            <input class="input-mini focused" name="timer_hours" type="text" value="" placeholder="HH">
+            <input class="input-mini" name="timer_minutes" type="text" value="" placeholder="MM">
+            <input class="input-mini" name="timer_seconds" type="text" value="" placeholder="SS">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="timer_twitter_hashtag">#hashtag</label>
+          <div class="controls">
+            <input class="input-xlarge" id="timer_twitter_hashtag" name="timer_twitter_hashtag" type="text" placeholder="#hashtag">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">Public URL</label>
+          <div class="controls">
+            <span class="help-inline"><a href="<%= timer_url(@timer.url_key) %>" target="_blank"><%= timer_url(@timer.url_key) %></a></span>
+            <a class="btn" href="http://chart.apis.google.com/chart?cht=qr&chs=150x150&choe=UTF-8&chld=H&chl=<%= timer_url(@timer.url_key) %>"><i class="icon-qrcode"></i> View QR Code</a>
+          </div>
+        </div>  
+        <div class="control-group">
+          <label class="control-label">Administration URL </label>
+          <div class="controls">
+            <a href="/about" id="gopro" class="btn" rel="popover" data-content="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod." data-original-title="Pro account coming soon">GO PRO</a> <span class="label label-info">Coming soon</span> 
+          </div>
+        </div>  
+      </fieldset>
+    </div>
+    <div class="form-actions" class="modal-footer">
+      <button type="submit" class="btn btn-primary save">Save changes</button>
+      <button class="btn" data-dismiss="modal">Cancel</button>
+    </div>
+  </form>
+
+</div>
+
+<%= javascript_tag do %>
+  var timerData = '<%=raw({
+    time: {
+      hours: @timer.time && (@timer.time / 60 / 60).floor % 60,
+      minutes: @timer.time && (@timer.time / 60).floor % 60,
+      seconds: @timer.time && (@timer.time).floor % 60,
+    },
+    twitterHashtag: @timer.twitter_hashtag
+  }.to_json) %>'
+<% end %>
+

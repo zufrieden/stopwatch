@@ -1,4 +1,7 @@
-Stopwatch::Application.configure do
+require 'faye'
+require 'faye/redis'
+
+StopWatch::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
@@ -40,19 +43,35 @@ Stopwatch::Application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
   # Use a different cache store in production
-  # config.cache_store = :mem_cache_store
+  config.cache_store = :dalli_store, { namespace: 'stopwatch_cache' }
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
-  # config.action_controller.asset_host = "http://assets.example.com"
+  config.action_controller.asset_host = Proc.new do |source|
+    "//#{ENV['S3_ASSET_BUCKET']}.s3.amazonaws.com"
+  end
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  # config.assets.precompile += %w( search.js )
+  config.assets.precompile += %w( impress.js presentation.js presentation.css startup.js startup.css )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 
   # Enable threaded mode
   # config.threadsafe!
+
+  # Add Faye has middleware
+  redis_config = ENV['REDISTOGO_URL'].match(/redis:\/\/.+?:(?<password>.+?)@(?<host>.+?):(?<port>\d+)/)
+  config.middleware.insert_before 'Rack::Cache', 'Faye::RackAdapter',
+    mount: '/faye',
+    timeout: 25,
+    ping: 20,
+    engine: {
+      type:     Faye::Redis,
+      host:     redis_config[:host],
+      port:     redis_config[:port],
+      password: redis_config[:password],
+      database: 1
+    }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)

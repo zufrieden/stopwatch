@@ -12,196 +12,164 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require underscore
 //= require bootstrap
+//= require jquery.fittext
+//= require moment
+//
+//= require stopwatch
+//
 
-   jQuery(document).ready(function() {
-      
-      $('#countdown_dashboard').countDown({
-         targetDate: {
-            'day':   4,
-            'month': 3,
-            'year':  2012,
-            'hour':  16,
-            'min':   0,
-            'sec':   0
-         }
+$(function() {
+  $(".stopwatch").fitText(0.5, { minFontSize: '20px'});
+
+  $('[rel=popover]').popover();
+
+  var stopwatch = new StopWatch(JSON.parse(timerData));
+  var timer_url_key = window.location.pathname.match(/^\/(timer\/)?([^\/]+)/)[2];
+
+  var lastTweetID, tweets = [];
+
+  $('.timer-event').on('click', function() {
+    var event = ($(this).attr('class').match(/start|stop|reset/) || [])[0];
+
+    if (typeof _gaq !== 'undefined') {
+      switch(event) {
+        case 'start':
+          _gaq.push(['_trackEvent', 'Timer', 'Start', null, stopwatch.timeInSeconds()]);
+        break;
+        case 'stop':
+          _gaq.push(['_trackEvent', 'Timer', 'Stop']);
+        break;
+        case 'reset':
+          _gaq.push(['_trackEvent', 'Timer', 'Reset', null, stopwatch.timeInSeconds()]);
+        break;
+      }
+    }
+
+    if (event) {
+      $.ajax({
+        url: '/timer/' + timer_url_key + '/event',
+        type: 'POST',
+        contentType: 'application/json',
+        dataType: 'json',
+        data: JSON.stringify({timer: {
+          event: event,
+          time: (event === 'reset' ? stopwatch.options.time : null)
+        }})
       });
-   });
+    }
+  });
 
+  var fayeClient = new Faye.Client('/faye', {
+    timeout: 30,
+    retry: 5
+  });
+  fayeClient.disable('websocket');
 
-$.fn.countDown = function (options) {
+  fayeClient.subscribe('/timer/' + timer_url_key + '/event', function(data) {
+    switch(data.event) {
+      case 'start':
+        stopwatch.start(data.time);
+        if (typeof _gaq !== 'undefined') {
+          _gaq.push(['_trackEvent', 'Timer', 'Started', null, stopwatch.timeInSeconds(), true]);
+        }
+      break;
+      case 'stop':
+        stopwatch.stop();
+        if (typeof _gaq !== 'undefined') {
+          _gaq.push(['_trackEvent', 'Timer', 'Stopped', null, null, true]);
+        }
+      break;
+      case 'reset':
+        stopwatch.reset(data.time);
+        if (typeof _gaq !== 'undefined') {
+          _gaq.push(['_trackEvent', 'Timer', 'Reseted', null, stopwatch.timeInSeconds(), true]);
+        }
+      break;
+    }
+  });
 
-      config = {};
+  // init configuration form
+  $('a[href=#configure]').on('click', function(event) {
+    var time = stopwatch.options.time;
 
-      $.extend(config, options);
+    $('#configure input[name=timer_hours]').val((time.hours && (time.hours >= 10 ? '' : '0') + time.hours) || '');
+    $('#configure input[name=timer_minutes]').val((time.minutes && (time.minutes >= 10 ? '' : '0') + time.minutes) || '00');
+    $('#configure input[name=timer_seconds]').val((time.seconds && (time.seconds >= 10 ? '' : '0') + time.seconds) || '00');
+    $('#configure input[name=timer_twitter_hashtag]').val(stopwatch.options.twitterHashtag);
+  });
 
-      diffMilliSecs = this.setCountDown(config);
+  // focus on first configuration input when shown
+  $('#configure').on('shown', function(event) {
+    $('#configure input[name=timer_hours]').focus();
+  });
 
-      $('#' + $(this).attr('id') + ' .digit').html('<div class="top"></div><div class="bottom"></div>');
-      $(this).doCountDown($(this).attr('id'), diffMilliSecs, 500);
+  // update data when configuration saved
+  $('#configure').on('click', 'button.save', function(event) {
+    event.preventDefault();
 
-      if (config.onComplete)
-      {
-         $.data($(this)[0], 'callback', config.onComplete);
-      }
-      if (config.omitWeeks)
-      {
-         $.data($(this)[0], 'omitWeeks', config.omitWeeks);
-      }
+    var options = {
+      time: {
+        hours: parseInt($('#configure input[name=timer_hours]').val()) || 0,
+        minutes: parseInt($('#configure input[name=timer_minutes]').val()) || 0,
+        seconds: parseInt($('#configure input[name=timer_seconds]').val()) || 0
+      },
+      twitter_hashtag: $('#configure input[name=timer_twitter_hashtag]').val().match(/^#?([^\s]*)/)[1]
+    };
 
-      var id = $(this).attr('id');      
-      if(diffMilliSecs > 0) {
-         var hack = function() {
-            if(!this.n || this.n < 0) {
-               this.n = 99;
-            } else {
-               this.n = this.n-1;
-            }
-            $(this).dashChangeTo(id, 'miseconds_dash', this.n, 100);
-         };
-         var hackTimer = setInterval(hack, 10);
-         $('#'+id).data('hackTimer', hackTimer);
-         
-      } else {
-         $(this).dashChangeTo(id, 'miseconds_dash', 0, 100);
-      }
-            
-      return this;
+    // update timer on client
+    stopwatch.setTwitterHashtag(options.twitter_hashtag);
+    stopwatch.reset(options.time);
 
-   };
+    // reset tweets
+    tweets = [], lastTweetID = null;
 
-   $.fn.stopCountDown = function () {
-      clearTimeout($.data(this[0], 'timer'));
-   };
+    // close modal
+    $('#configure').modal('hide');
 
-   $.fn.startCountDown = function () {
-      this.doCountDown($(this).attr('id'),$.data(this[0], 'diffMilliSecs'), 500);
-   };
+    // update timer on server
+    $.ajax({
+      url: '/timer/' + timer_url_key,
+      type: 'PUT',
+      contentType: 'application/json',
+      dataType: 'json',
+      data: JSON.stringify({timer: {
+        time: stopwatch.options.time,
+        twitter_hashtag: stopwatch.options.twitterHashtag || ''
+      }})
+    });
+  });
 
-   $.fn.setCountDown = function (options) {
-      var targetTime = new Date();
+  // twitter integration
+  var updateTweets = function() {
+    if (stopwatch.options.twitterHashtag) {
+      $.getJSON('http://search.twitter.com/search.json?q=' + stopwatch.options.twitterHashtag + '&since_id=' + lastTweetID + '&result_type=recent&rpp=100&include_entities=true&callback=?',
+        function(results) {
+          results = _.filter(results.results, function(result) {
+            return _.any(result.entities.hashtags, function(hashtag) {
+              return (hashtag.text == stopwatch.options.twitterHashtag);
+            });
+          });
 
-      if (options.targetDate)
-      {
-         targetTime.setDate(options.targetDate.day);
-         targetTime.setMonth(options.targetDate.month-1);
-         targetTime.setFullYear(options.targetDate.year);
-         targetTime.setHours(options.targetDate.hour);
-         targetTime.setMinutes(options.targetDate.min);
-         targetTime.setSeconds(options.targetDate.sec);
-      }
-      else if (options.targetOffset)
-      {
-         targetTime.setDate(options.targetOffset.day + targetTime.getDate());
-         targetTime.setMonth(options.targetOffset.month + targetTime.getMonth());
-         targetTime.setFullYear(options.targetOffset.year + targetTime.getFullYear());
-         targetTime.setHours(options.targetOffset.hour + targetTime.getHours());
-         targetTime.setMinutes(options.targetOffset.min + targetTime.getMinutes());
-         targetTime.setSeconds(options.targetOffset.sec + targetTime.getSeconds());
-      }
-      
+          if (results.length > 0) {
+            tweets = _.union(results, _.initial(tweets, results.length));
+            lastTweetID = _.last(tweets).id;
+          }
 
-      var nowTime = new Date();
+          var tweet = _.first(_.shuffle(_.first(tweets, 10)))
+          $('.twitter_feed .profile_pic img').attr({src: tweet.profile_image_url});
+          $('.twitter_feed .tweet p:first').html(tweet.text);
+          $('.twitter_feed .tweet p:last a').html('@' + tweet.from_user);
+          $('.twitter_feed .tweet p:last').html('<a href="http://www.twitter.com/' + tweet.from_user +'">@' + tweet.from_user + '</a> ' + moment(tweet.created_at).fromNow());
+          $('.twitter_feed').addClass('twitter_feed_display');
+      });
+    } else {
+      $('.twitter_feed').removeClass('twitter_feed_display');
+    }
 
-      diffMilliSecs = Math.floor((targetTime.valueOf()-nowTime.valueOf()));
-
-      $.data(this[0], 'diffMilliSecs', diffMilliSecs);
-
-      return diffMilliSecs;
-   };
-
-   $.fn.doCountDown = function (id, diffMilliSecs, duration) {
-      $this = $('#' + id);
-
-      if (diffMilliSecs <= 0)
-      {
-         diffMilliSecs = 0;
-         if ($.data($this[0], 'timer'))
-         {
-            clearTimeout($.data($this[0], 'timer'));
-         }
-         
-         if($this.data('hackTimer')) {
-            clearTimeout($this.data('hackTimer'));
-         }
-      }
-      
-      var diffSecs = diffMilliSecs/1000;
-      dixSecs = Math.floor(diffMilliSecs/10) % 100;
-      
-      secs = Math.floor(diffSecs) % 60;
-      mins = Math.floor(diffSecs/60)%60;
-      hours = Math.floor(diffSecs/60/60)%24;
-      if ($.data($this[0], 'omitWeeks') == true)
-      {
-         days = Math.floor(diffSecs/60/60/24);
-         weeks = Math.floor(diffSecs/60/60/24/7);
-      }
-      else 
-      {
-         days = Math.floor(diffSecs/60/60/24)%7;
-         weeks = Math.floor(diffSecs/60/60/24/7);
-      }
-
-      //$this.dashChangeTo(id, 'miseconds_dash', dixSecs, 100);
-      $this.dashChangeTo(id, 'seconds_dash', secs, duration ? duration : 800);
-      $this.dashChangeTo(id, 'minutes_dash', mins, duration ? duration : 1200);
-      $this.dashChangeTo(id, 'hours_dash', hours, duration ? duration : 1200);
-      $this.dashChangeTo(id, 'days_dash', days, duration ? duration : 1200);
-      $this.dashChangeTo(id, 'weeks_dash', weeks, duration ? duration : 1200);
-
-      $.data($this[0], 'diffMilliSecs', diffMilliSecs);
-      if (diffMilliSecs > 0)
-      {
-         e = $this;
-         t = setTimeout(function() { e.doCountDown(id, diffMilliSecs-1000) } , 1000);
-         $.data(e[0], 'timer', t);
-      } 
-      else if (cb = $.data($this[0], 'callback')) 
-      {
-         $.data($this[0], 'callback')();
-      }
-
-   };
-
-   $.fn.dashChangeTo = function(id, dash, n, duration) {
-      $this = $('#' + id);
-      d2 = n%10;
-      d1 = (n - n%10) / 10
-
-      if ($('#' + $this.attr('id') + ' .' + dash))
-      {
-         $this.digitChangeTo('#' + $this.attr('id') + ' .' + dash + ' .digit:first', d1, duration);
-         $this.digitChangeTo('#' + $this.attr('id') + ' .' + dash + ' .digit:last', d2, duration);
-      }
-   };
-
-   $.fn.digitChangeTo = function (digit, n, duration) {
-      
-      // don't spend time to animate if duration < 200 millisecond...
-      if(duration < 200) {
-         $(digit + ' div.top').html((n ? n : '0'));
-         return;
-      }
-      
-      if (!duration)
-      {
-         duration = 800;
-      }
-      if ($(digit + ' div.top').html() != n + '')
-      {
-
-         $(digit + ' div.top').css({'display': 'none'});
-         $(digit + ' div.top').html((n ? n : '0')).slideDown(duration);
-
-         $(digit + ' div.bottom').animate({'height': ''}, duration, function() {
-            $(digit + ' div.bottom').html($(digit + ' div.top').html());
-            $(digit + ' div.bottom').css({'display': 'block', 'height': ''});
-            $(digit + ' div.top').hide().slideUp(10);
-
-         
-         });
-      }
-   };
-
+    _.delay(updateTweets, 7000);
+  }
+  updateTweets();
+});
 
