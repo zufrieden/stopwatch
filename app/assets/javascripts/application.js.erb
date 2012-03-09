@@ -61,7 +61,7 @@ $(function() {
     }
   });
 
-  var fayeClient = new Faye.Client('/faye', {
+  var fayeClient = new Faye.Client('<%= ENV['FAYE_SERVER_URI'] || '/faye' %>', {
     timeout: 30,
     retry: 5
   });

@@ -28,7 +28,7 @@ class TimerController < ApplicationController
     options[:time] &&= options[:time][:hours].to_i.hours + options[:time][:minutes].to_i.minutes + options[:time][:seconds].to_i.seconds
 
     if @timer.update_attributes(options, as: :admin)
-      publish_timer_event(params[:id], params[:timer])
+      publish_timer_event(params[:id], params[:timer].merge({ event: 'reset' }))
       render nothing: true, status: 200
     else
       render nothing: true, status: :not_acceptable
@@ -58,7 +58,7 @@ class TimerController < ApplicationController
   #
   # @return [Boolean] return false if params is invalid
   def publish_timer_event(url_key, timer = {})
-    if !%(start stop reset).include?(timer[:event]) || (timer[:time] && !timer[:time].is_a?(Hash))
+    if !timer[:event] || !%(start stop reset).include?(timer[:event]) || (timer[:time] && !timer[:time].is_a?(Hash))
       false
     else
       faye_client.publish("/timer/#{url_key}/event",
