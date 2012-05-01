@@ -48,6 +48,28 @@ $(function() {
     }
 
     if (event) {
+      var time;
+
+      switch(event) {
+        case 'start':
+          if (!stopwatch.isStarted()) {
+            time = {
+              hours: Math.floor(stopwatch.timeInSeconds()/60/60) % 60,
+              minutes: Math.floor(stopwatch.timeInSeconds()/60) % 60,
+              seconds: Math.floor(stopwatch.timeInSeconds()) % 60
+            }
+          } else {
+            time = stopwatch.options.time;
+          }
+          break;
+        case 'reset':
+          time = stopwatch.options.time;
+          break;
+        default:
+          time = null;
+          break;
+      }
+
       $.ajax({
         url: '/timer/' + timer_url_key + '/event',
         type: 'POST',
@@ -55,7 +77,7 @@ $(function() {
         dataType: 'json',
         data: JSON.stringify({timer: {
           event: event,
-          time: (event === 'reset' ? stopwatch.options.time : null)
+          time: time
         }})
       });
     }

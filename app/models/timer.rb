@@ -5,6 +5,7 @@ class Timer < ActiveRecord::Base
     admin_key         :string, validates: [:presence],               index: true
     twitter_hashtag   :string
     time              :integer
+    time_end_at       :datetime, null: true
 
     timestamps
   end

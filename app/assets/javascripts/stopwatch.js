@@ -44,27 +44,31 @@
         this.stop();
       }
 
-      // set new time
-      if (time) {
-        this.options.time = time;
+      // get default time
+      if (!time) {
+        time = this.options.time;
       }
 
+      // translate time in seconds
+      var timerLength = 0;
+      timerLength += (time.days || 0) * 24 * 60 * 60;
+      timerLength += (time.hours || 0) * 60 * 60;
+      timerLength += (time.minutes || 0) * 60;
+      timerLength += (time.seconds || 0);
+
       // reset time
-      this._timerLength = this._time = this.timeInSeconds();
+      this._time = this._timerLength = timerLength;
 
       // reset timer view
       this._render(this._time);
     },
 
+    isStarted: function() {
+      return !!this._started;
+    },
+
     timeInSeconds: function() {
-      var time = 0;
-      if (this.options.time) {
-        time += (this.options.time.days || 0) * 24 * 60 * 60;
-        time += (this.options.time.hours || 0) * 60 * 60;
-        time += (this.options.time.minutes || 0) * 60;
-        time += (this.options.time.seconds || 0);
-      }
-      return time;
+      return this._time;
     },
 
     setTwitterHashtag: function(twitter_hashtag) {

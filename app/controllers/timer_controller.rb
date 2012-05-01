@@ -36,11 +36,24 @@ class TimerController < ApplicationController
   end
 
   def event
+    @timer = Timer.where('url_key = ?', params[:id]).first
+
     # return unauthorized status if current session user is not an admin
     if !admin?
       render nothing: true, status: :unauthorized
     # return success status if event can be sent to clients
     elsif publish_timer_event(params[:id], params[:timer])
+      if params[:timer][:event] == 'start'
+        if params[:timer][:time].present?
+          time_from_now = (params[:timer][:time][:hours].to_i.hours + params[:timer][:time][:minutes].to_i.minutes + params[:timer][:time][:seconds].to_i.seconds).from_now
+        else
+          time_from_now = @timer.time.from_now
+        end
+      else
+        time_from_now = nil
+      end
+      @timer.update_attribute(:time_end_at, time_from_now)
+
       render nothing: true, status: 200
     # or return not acceptable if not
     else

@@ -32,4 +32,7 @@ describe Timer do
   it { should have_db_column(:time) }
   it { should allow_mass_assignment_of(:time).as(:admin) }
 
+  it { should have_db_column(:time_end_at) }
+  it { should_not allow_mass_assignment_of(:time_end_at).as(:admin) }
+
 end
