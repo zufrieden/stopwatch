@@ -71,8 +71,16 @@ class TimerController < ApplicationController
   #
   # @return [Boolean] return false if params is invalid
   def publish_timer_event(url_key, timer = {})
-    if !timer[:event] || !%(start stop reset).include?(timer[:event]) || (timer[:time] && !timer[:time].is_a?(Hash))
+    if !timer[:event] || !%(start stop reset connect).include?(timer[:event]) || (timer[:time] && !timer[:time].is_a?(Hash))
       false
+    elsif timer[:event] == 'connect'
+      @timer = Timer.where('url_key = ?',url_key).first
+
+      faye_client.publish("/timer/#{url_key}/event",
+        event: timer[:event],
+        clientKey: timer[:clientKey],
+        time: @timer.time_end_at ? @timer.time_end_at - Time.zone.now : nil
+      )
     else
       faye_client.publish("/timer/#{url_key}/event",
         event: timer[:event],

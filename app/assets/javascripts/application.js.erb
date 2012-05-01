@@ -28,8 +28,11 @@ $(function() {
   var stopwatch = new StopWatch(JSON.parse(timerData));
   var timer_url_key = window.location.pathname.match(/^\/(timer\/)?([^\/]+)/)[2];
 
+  var clientKey = Math.floor(Math.random()*10000000001).toString();
+
   var lastTweetID, tweets = [];
 
+  // init timer event on click action
   $('.timer-event').on('click', function() {
     var event = ($(this).attr('class').match(/start|stop|reset/) || [])[0];
 
@@ -83,6 +86,7 @@ $(function() {
     }
   });
 
+  // init Faye client
   var fayeClient = new Faye.Client('<%= ENV['FAYE_SERVER_URI'] || '/faye' %>', {
     timeout: 30,
     retry: 5
@@ -109,8 +113,30 @@ $(function() {
           _gaq.push(['_trackEvent', 'Timer', 'Reseted', null, stopwatch.timeInSeconds(), true]);
         }
       break;
+      case 'connect':
+        if(data.clientKey === clientKey && data.time) {
+          stopwatch.start(data.time);
+          if (typeof _gaq !== 'undefined') {
+            _gaq.push(['_trackEvent', 'Timer', 'Started', null, stopwatch.timeInSeconds(), true]);
+          }
+        }
+      break;
     }
   });
+
+  // send connection event
+  _.delay(function() {
+    $.ajax({
+      url: '/timer/' + timer_url_key + '/event',
+      type: 'POST',
+      contentType: 'application/json',
+      dataType: 'json',
+      data: JSON.stringify({timer: {
+        event: 'connect',
+        clientKey: clientKey
+      }})
+    });
+  }, 5000);
 
   // init configuration form
   $('a[href=#configure]').on('click', function(event) {
